@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const imageRegex = /\.(jpg|jpeg|png)$/;
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -7,7 +6,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   birth_date: {
-    type: Date,
+    type: Number,
     required: true,
   },
   email: {
@@ -22,12 +21,6 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
     required: true,
-    validate: {
-      validator: function (value) {
-        return imageRegex.test(value);
-      },
-      message: "Avatar must be a valid image URL (jpg, jpeg, png).",
-    },
   },
   role: {
     type: String,
@@ -57,6 +50,10 @@ const userSchema = new mongoose.Schema({
     when: {
       role: "Student",
     },
+  },
+  password: {
+    type: String,
+    required: true,
   },
   isAdmin: {
     type: Boolean,

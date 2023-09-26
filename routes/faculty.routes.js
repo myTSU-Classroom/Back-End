@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { Faculty } = require("../models/faculty");
-const { Direction } = require("../models/direction");
+const { Faculty } = require("../models/faculty.model");
+const { Direction } = require("../models/direction.model");
 
 // Get faculty
 router.get("/", async (req, res) => {
