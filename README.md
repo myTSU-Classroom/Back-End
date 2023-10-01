@@ -1,7 +1,7 @@
 ## MyTSU Classroom API Guideline
 
 ### Endpoint
-http://45.153.69.181/api
+http://mytsuclassroom.my.id/api
 
 ### Get all faculties
 - URL
