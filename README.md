@@ -1,7 +1,7 @@
 ## MyTSU Classroom API Guideline
 
 ### Endpoint
-http://45.153.69.181/api
+http://mytsuclassroom.my.id/api
 
 ### Get all faculties
 - URL
@@ -17,6 +17,8 @@ http://45.153.69.181/api
   }
 ]
 ```
+
+___
 
 ### Get disciplines and groups
 - URL
@@ -60,4 +62,41 @@ http://45.153.69.181/api
     ]
   }
  ]
+```
+
+___
+
+### Register a new user
+- URL
+	- `/register`
+- Method 
+	- `POST`
+
+#### Example:
+
+- Request
+```json
+{
+	"name": "String",
+	"birth_date": Number,
+	"email": "String",
+	"phone": "String",
+	"role": "Student" / "Teacher",
+	"faculty": "String",
+	"direction": "String",
+	"group": "String",
+	"grade": Number,
+	"avatar": File,
+	"isAdmin": false,
+}
+```
+
+The format in the example is in JSON but the actual type of the request is `form-data`. The birth date is in millisecond, the role is either "Student" or "Teacher", the avatar is a jpg/jpeg/png File.
+
+- Response
+```json
+{
+	"error": false,
+      	"message": "User data has been saved.",
+}
 ```
