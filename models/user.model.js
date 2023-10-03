@@ -59,7 +59,15 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  isEmailVerified: {
+    type: Boolean,
+    default: false,
+  },
+  isAdminVerified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const User = mongoose.model("user-database", userSchema);
+const User = mongoose.model("User", userSchema);
 module.exports = { User };

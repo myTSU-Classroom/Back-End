@@ -16,10 +16,10 @@ const subjectSchema = new mongoose.Schema({
   teachers: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user-database",
+      ref: "User",
     },
   ],
 });
 
-const Subject = mongoose.model("subject-database", subjectSchema);
+const Subject = mongoose.model("Subject", subjectSchema);
 module.exports = { Subject };

@@ -15,7 +15,10 @@ const avatarConfig = multer.diskStorage({
     callback(errorMessage, "uploads/avatar");
   },
   filename: function (req, file, callback) {
-    callback(null, `avatar-${Date.now()}${path.extname(file.originalname)}`);
+    callback(
+      null,
+      `Avatar_Profile_${Date.now()}${path.extname(file.originalname)}`
+    );
   },
 });
 

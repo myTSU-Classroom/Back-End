@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const setupMiddleware = require("./middleware/middleware");
 const setupRouter = require("./routes/routes");
-const setupDatabase = require("./config/db.config");
+const setupDatabase = require("./configs/db.config");
 
 require("dotenv/config");
 setupMiddleware(app);

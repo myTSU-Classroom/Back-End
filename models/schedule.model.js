@@ -20,16 +20,16 @@ const scheduleSchema = new mongoose.Schema({
   group: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "group-database",
+      ref: "Group",
       required: true,
     },
   ],
   subject: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "subject-database",
+    ref: "Subject",
     required: true,
   },
 });
 
-const Schedule = mongoose.model("schedule-database", scheduleSchema);
+const Schedule = mongoose.model("Schedule", scheduleSchema);
 module.exports = { Schedule };

@@ -28,8 +28,5 @@ const disciplineSchema = new mongoose.Schema({
   },
 });
 
-const DisciplineSchema = mongoose.model(
-  "discipline-database",
-  disciplineSchema
-);
+const DisciplineSchema = mongoose.model("Discipline", disciplineSchema);
 module.exports = { Discipline };

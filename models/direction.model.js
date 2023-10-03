@@ -14,11 +14,11 @@ const directionSchema = new mongoose.Schema({
   },
   facultyId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "faculty-database",
+    ref: "Faculty",
     required: true,
   },
   group: [groupSchema],
 });
 
-const Direction = mongoose.model("direction-database", directionSchema);
+const Direction = mongoose.model("Direction", directionSchema);
 module.exports = { Direction };
