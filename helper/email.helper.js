@@ -29,16 +29,17 @@ async function sendVerificationEmail(req, token) {
                                           Welcome! Please verify your email account within 30 minutes.
                                       </td>
                                   </tr>
+                                  
+                                  <tr>
+                                      <td style="color: #333; font-size: 18px; text-align: center;">
+                                          Upon completion, your account will undergo verification by the administrator to confirm your account status. This process may take a while. Thank you for registering your account.
+                                      </td>
+                                  </tr>
                                   <tr>
                                       <td align="center">
                                           <a href="${req.protocol}://${req.get(
     "host"
   )}/api/verify/${token}" style="background-color: #2d85c5; color: #fff; text-decoration: none; padding: 10px 30px; border-radius: 100px; font-weight: bold; font-size: 20px;">Verify Email</a>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td style="color: #333; font-size: 18px; text-align: center;">
-                                          Upon completion, your account will undergo verification by the administrator to confirm your account status. This process may take a while. Thank you for registering your account.
                                       </td>
                                   </tr>
                               </table>
@@ -67,6 +68,10 @@ async function sendVerificationEmail(req, token) {
     });
   } catch (err) {
     console.error("Error sending email:", err);
+    if (err.responseCode) {
+      console.error("SMTP Response Code:", err.responseCode);
+      console.error("SMTP Response:", err.response);
+    }
     throw err;
   }
 }
