@@ -21,14 +21,11 @@ router.post("/register", uploadAvatar.single("avatar"), async (req, res) => {
         message: "Email is already registered.",
       });
     }
-  } catch (err) {
-    console.log(err);
-  }
 
-  try {
     const avatarPath = `${req.protocol}://${req.get("host")}/uploads/avatar/${
       req.file.filename
     }`;
+
     const isAdmin = req.body.isAdmin || false;
 
     var generatedPassword = passwordGenerator.generate({
@@ -63,7 +60,7 @@ router.post("/register", uploadAvatar.single("avatar"), async (req, res) => {
     emailHelper.sendVerificationEmail(req, token.token);
 
     return res.status(200).json({
-      error: true,
+      error: false,
       message: "User data has been saved.",
     });
   } catch (err) {
@@ -74,6 +71,7 @@ router.post("/register", uploadAvatar.single("avatar"), async (req, res) => {
   }
 });
 
+/* Get all user */
 router.get("/user", async (req, res) => {
   try {
     const user = await User.find();
@@ -87,12 +85,11 @@ router.get("/user", async (req, res) => {
 
     return res.status(200).json(user);
   } catch (err) {
-    console.error("Error sending email:", err);
-    if (err.responseCode) {
-      console.error("SMTP Response Code:", err.responseCode);
-      console.error("SMTP Response:", err.response);
-    }
-    throw err;
+    console.error(err);
+    return res.status(500).json({
+      error: true,
+      message: "An error occurred while processing your request.",
+    });
   }
 });
 
