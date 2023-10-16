@@ -1,0 +1,121 @@
+const { Direction } = require("../../models/direction.model");
+
+/* Create a group */
+async function createGroup(req, res, next) {
+  const direction = await Direction.findById(req.body.directionId);
+
+  if (!direction) {
+    return res.status(400).json({
+      error: true,
+      message: "Direction does not exist.",
+    });
+  }
+
+  const newGroup = {
+    group_code: req.body.groupCode,
+  };
+
+  try {
+    direction.group.push(newGroup);
+
+    await direction.save();
+
+    return res.status(200).json({
+      error: false,
+      message: `Group (${req.body.groupCode}) is registered.`,
+    });
+  } catch (err) {
+    return res.status(500).send({
+      error: true,
+      message: err.message,
+    });
+  }
+}
+
+/* Update a group*/
+async function updateGroup(req, res, next) {
+  const direction = await Direction.findById(req.body.directionId);
+
+  if (!direction) {
+    return res.status(404).json({
+      error: true,
+      message: "Direction does not exist.",
+    });
+  }
+
+  const directionId = req.body.directionId;
+  const groupCodeBefore = req.body.groupCodeBefore;
+  const groupCodeAfter = req.body.groupCodeAfter;
+
+  try {
+    const updatedGroup = await Direction.findOneAndUpdate(
+      { _id: directionId, "group.group_code": groupCodeBefore },
+      { $set: { "group.$.group_code": groupCodeAfter } },
+      { new: true }
+    );
+
+    if (updatedGroup) {
+      return res.status(200).json({
+        error: false,
+        message: `Group code has been updated successfully.`,
+      });
+    } else {
+      return res.status(404).json({
+        error: true,
+        message: "No matching document found to update.",
+      });
+    }
+  } catch (err) {
+    return res.status(500).send({
+      error: true,
+      message: err.message,
+    });
+  }
+}
+
+/* Delete a group */
+async function deleteGroup(req, res, next) {
+  const direction = await Direction.findById(req.body.directionId);
+
+  if (!direction) {
+    return res.status(404).json({
+      error: true,
+      message: "Direction is not exist.",
+    });
+  }
+
+  const groupCode = req.body.groupCode;
+
+  try {
+    const deletedGroup = direction.group.filter(
+      (group) => group.group_code !== groupCode
+    );
+
+    direction.group = deletedGroup;
+
+    const updatedDirection = await direction.save();
+
+    if (updatedDirection) {
+      return res.status(200).json({
+        error: false,
+        message: `Group code (${groupCode}) has been deleted successfully.`,
+      });
+    } else {
+      return res.status(404).json({
+        error: true,
+        message: "No matching document found to update.",
+      });
+    }
+  } catch (err) {
+    return res.status(500).send({
+      error: true,
+      message: err.message,
+    });
+  }
+}
+
+module.exports = {
+  createGroup,
+  updateGroup,
+  deleteGroup,
+};
