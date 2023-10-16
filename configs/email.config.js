@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 require("dotenv/config");
 
 const emailTransporter = nodemailer.createTransport({
-  host: "smtp-relay.sendinblue.com",
+  host: "smtp-relay.brevo.com",
   port: 587,
   auth: {
     user: process.env.EMAIL_ADDRESS,
