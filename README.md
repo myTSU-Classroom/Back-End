@@ -1,7 +1,7 @@
 ## MyTSU Classroom API Guideline
 
 ### Endpoint
-http://mytsuclassroom.my.id/api
+https://mytsuclassroom.my.id/api
 
 ### Get all faculties
 - URL
