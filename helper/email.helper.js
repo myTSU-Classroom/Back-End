@@ -54,7 +54,7 @@ async function sendVerificationEmail(req, token) {
   `;
   try {
     await emailTransporter.sendMail({
-      from: "no-reply@mytsuclassroom.my.id",
+      from: '"MyTSU Classroom" <no-reply@mytsuclassroom.my.id>',
       to: req.body.email,
       subject: "Confirm email address for MyTSU Classroom",
       html: emailBody,
@@ -66,6 +66,7 @@ async function sendVerificationEmail(req, token) {
         },
       ],
     });
+    console.log("Email sent...");
   } catch (err) {
     console.error("Error sending email:", err);
     if (err.responseCode) {

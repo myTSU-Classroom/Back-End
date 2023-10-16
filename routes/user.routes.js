@@ -57,6 +57,7 @@ router.post("/register", uploadAvatar.single("avatar"), async (req, res) => {
 
     await token.save();
 
+    console.log("Sending email...");
     emailHelper.sendVerificationEmail(req, token.token);
 
     return res.status(200).json({
