@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Faculty } = require("../models/faculty.model");
 const { Direction } = require("../models/direction.model");
+const mongoose = require("mongoose");
 
 // Get faculty
 router.get("/", async (req, res) => {
@@ -25,8 +26,18 @@ router.get("/", async (req, res) => {
 
 // Get faculty's direction
 router.get("/:id", async (req, res) => {
-  const facultyId = req.params.id;
-  const directions = await Direction.find({ faculty_id: facultyId });
+  const id = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({
+      error: true,
+      message: "Invalid ObjectId format",
+    });
+  }
+
+  const directions = await Direction.find({
+    faculty_id: new mongoose.Types.ObjectId(id),
+  });
 
   if (!directions || directions.length === 0) {
     return res.status(404).json({
