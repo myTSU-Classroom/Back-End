@@ -13,7 +13,7 @@ router.get("/verify/:token", async (req, res) => {
     if (!verificationToken || verificationToken.expiredAt < Date.now()) {
       return res.status(400).render("email_confirmation", {
         message: "Invalid or expired verification token.",
-        logo: `${req.protocol}://${req.get("host")}/wpf_books.svg`,
+        logo: `${process.env.HOST_DEVELOPMENT}/wpf_books.svg`,
       });
     }
 
@@ -34,7 +34,7 @@ router.get("/verify/:token", async (req, res) => {
 
     return res.status(200).render("email_confirmation", {
       message: "Your email account has been verified.",
-      logo: `${req.protocol}://${req.get("host")}/wpf_books.svg`,
+      logo: `${process.env.HOST_DEVELOPMENT}/wpf_books.svg`,
     });
   } catch (err) {
     return res.status(400).send({
