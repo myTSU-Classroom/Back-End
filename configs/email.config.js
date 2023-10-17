@@ -8,6 +8,7 @@ const emailTransporter = nodemailer.createTransport({
     user: process.env.EMAIL_ADDRESS,
     pass: process.env.EMAIL_PASSWORD,
   },
+  connectionTimeout: 10000,
 });
 
 module.exports = { emailTransporter };
