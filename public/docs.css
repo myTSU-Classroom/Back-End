@@ -106,3 +106,41 @@ main {
   border-radius: 5px;
   padding: 10px;
 }
+
+@media only screen and (max-width: 768px) {
+  .method {
+    font-size: 16px;
+  }
+
+  .collapsible {
+    padding: 10px;
+  }
+
+  .endpoint pre {
+    font-size: 16px;
+    overflow-x: scroll;
+  }
+
+  #title {
+    font-size: 14px;
+  }
+
+  .description {
+    margin-left: 5px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .method {
+    font-size: 14px;
+  }
+
+  .collapsible {
+    padding: 8px;
+  }
+
+  .endpoint pre {
+    font-size: 14px;
+    overflow-x: scroll;
+  }
+}
