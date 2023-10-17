@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { User } = require("../models/user.model");
 const { Token } = require("../models/token.model");
-const path = require("path");
+require("dotenv/config");
 
 router.get("/verify/:token", async (req, res) => {
   try {
@@ -22,7 +22,7 @@ router.get("/verify/:token", async (req, res) => {
     if (!user) {
       return res.status(400).render("email_confirmation", {
         message: "User not found.",
-        logo: `${req.protocol}://${req.get("host")}/wpf_books.svg`,
+        logo: `${process.env.HOST_DEVELOPMENT}/wpf_books.svg`,
       });
     }
 

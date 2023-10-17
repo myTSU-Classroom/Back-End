@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/docs.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-lucario.css"
+    />
+    <title>API Documentation</title>
+  </head>
+  <body>
+    <header>
+      <h1 class="mytsu">
+        <img src="<%= logo %>" class="icon" /> MyTSU Classroom
+      </h1>
+      <h1>API Documentation</h1>
+    </header>
+    <main>
+      <!-- Get faculty -->
+      <section class="endpoint">
+        <p class="collapsible" id="title">
+          <span class="method" id="get">GET</span>
+          /faculty
+          <span class="description">Get all faculties</span>
+        </p>
+        <div class="content" style="display: none">
+          <div class="request">
+            <strong>Request</strong>
+            <p>Empty</p>
+          </div>
+          <div class="response">
+            <strong>Response</strong>
+            <pre class="language-json">
+{
+    "_id":"65105348d5e17d0a4cc818bb",
+    "faculty":"Institute of Applied Mathematics and Computer Science"
+}</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Get direction and group -->
+      <section class="endpoint">
+        <p class="collapsible" id="title">
+          <span class="method" id="get">GET</span>
+          /faculty/{faculty_id}
+          <span class="description">Get all directions and groups</span>
+        </p>
+        <div class="content" style="display: none">
+          <div class="request">
+            <strong>Request</strong>
+            <p>Empty</p>
+          </div>
+          <div class="response">
+            <strong>Response</strong>
+            <pre class="language-json">
+{
+  "_id": "6511922cce8b634aee5c5095",
+  "direction": "Fundamental Informatic and Informations Technology",
+  "faculty_id": "65105348d5e17d0a4cc818bb",
+  "group": [
+    {
+      "_id": "6511a22fa6c81762cea204f5",
+      "group_code": "500101"
+    },
+    {
+      "_id": "6511a22fa6c81762cea204f6",
+      "group_code": "500102"
+    },
+    {
+      "_id": "6511a22fa6c81762cea204f7",
+      "group_code": "500103"
+    },
+    {
+      "_id": "6511a22fa6c81762cea204f8",
+      "group_code": "500104"
+    },
+    {
+      "_id": "6511a22fa6c81762cea204f9",
+      "group_code": "500105"
+    }
+  ]
+}</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Create user -->
+      <section class="endpoint">
+        <p class="collapsible" id="title">
+          <span class="method" id="post">POST</span>
+          /register
+          <span class="description">Create a new account</span>
+        </p>
+        <div class="content" style="display: none">
+          <div class="request">
+            <strong>Request</strong>
+            <pre class="language-json">
+{
+  "name": "String",
+  "birth_date": Number,
+  "email": "String",
+  "phone": "String",
+  "role": "Student" / "Teacher",
+  "faculty": "String",
+  "direction": "String",
+  "group": "String",
+  "grade": Number,
+  "avatar": File,
+  "isAdmin": false,
+}</pre
+            >
+          </div>
+          <div class="response">
+            <strong>Response</strong>
+            <pre class="language-json">
+{
+  "error": false,
+  "message": "User data has been saved.",
+}</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Create faculty -->
+      <section class="endpoint">
+        <p class="collapsible" id="title">
+          <span class="method" id="post">POST</span>
+          /admin/faculty
+          <span class="description">Create a new faculty</span>
+        </p>
+        <div class="content" style="display: none">
+          <div class="request">
+            <strong>Header</strong>
+            <pre class="language-css">Authorization: Bearer {token}</pre>
+            <strong>Request</strong>
+            <pre class="language-json">
+{
+  "facultyName": "Fakultas Kedokteran"
+}</pre
+            >
+          </div>
+          <div class="response">
+            <strong>Response</strong>
+            <pre class="language-json">
+{
+  "error": false,
+  "message": "Faculty (Fakultas Kedokteran) is registered."
+}</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Update faculty -->
+      <section class="endpoint">
+        <p class="collapsible" id="title">
+          <span class="method" id="put">PUT</span>
+          /admin/faculty
+          <span class="description">Update a faculty</span>
+        </p>
+        <div class="content" style="display: none">
+          <div class="request">
+            <strong>Header</strong>
+            <pre class="language-css">Authorization: Bearer {token}</pre>
+            <strong>Request</strong>
+            <pre class="language-json">
+{
+  "facultyId": "652e4e4994e419f3199ba2be",
+  "facultyName": "Fakultas Ilmu Kedokteran"
+}</pre
+            >
+          </div>
+          <div class="response">
+            <strong>Response</strong>
+            <pre class="language-json">
+{
+  "error": false,
+  "message": "Faculty has been updated successfully."
+}</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Delete faculty -->
+      <section class="endpoint">
+        <p class="collapsible" id="title">
+          <span class="method" id="delete">DELETE</span>
+          /admin/faculty
+          <span class="description">Delete a faculty</span>
+        </p>
+        <div class="content" style="display: none">
+          <div class="request">
+            <strong>Header</strong>
+            <pre class="language-css">Authorization: Bearer {token}</pre>
+            <strong>Request</strong>
+            <pre class="language-json">
+{
+  "facultyId": "652e4e4994e419f3199ba2be",
+}</pre
+            >
+          </div>
+          <div class="response">
+            <strong>Response</strong>
+            <pre class="language-json">
+{
+  "error": false,
+  "message": "Faculty (Fakultas Kedokteran) has been deleted successfully."
+}</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Create direction -->
+      <section class="endpoint">
+        <p class="collapsible" id="title">
+          <span class="method" id="post">POST</span>
+          /admin/direction
+          <span class="description">Create a new direction</span>
+        </p>
+        <div class="content" style="display: none">
+          <div class="request">
+            <strong>Header</strong>
+            <pre class="language-css">Authorization: Bearer {token}</pre>
+            <strong>Request</strong>
+            <pre class="language-json">
+{
+  "facultyId": "652d3a0f5c034077868f29c2",
+  "directionName": "SpaceX"
+}</pre
+            >
+          </div>
+          <div class="response">
+            <strong>Response</strong>
+            <pre class="language-json">
+{
+  "error": false,
+  "message": "Direction (SpaceX) is registered."
+}</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Update direction -->
+      <section class="endpoint">
+        <p class="collapsible" id="title">
+          <span class="method" id="put">PUT</span>
+          /admin/direction
+          <span class="description">Update a direction</span>
+        </p>
+        <div class="content" style="display: none">
+          <div class="request">
+            <strong>Header</strong>
+            <pre class="language-css">Authorization: Bearer {token}</pre>
+            <strong>Request</strong>
+            <pre class="language-json">
+{
+  "directionId": "652e52a294e419f3199ba2d2",
+  "directionName": "NASA"
+}</pre
+            >
+          </div>
+          <div class="response">
+            <strong>Response</strong>
+            <pre class="language-json">
+{
+  "error": false,
+  "message": "Direction has been updated successfully."
+}</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Delete direction -->
+      <section class="endpoint">
+        <p class="collapsible" id="title">
+          <span class="method" id="delete">DELETE</span>
+          /admin/direction
+          <span class="description">Delete a direction</span>
+        </p>
+        <div class="content" style="display: none">
+          <div class="request">
+            <strong>Header</strong>
+            <pre class="language-css">Authorization: Bearer {token}</pre>
+            <strong>Request</strong>
+            <pre class="language-json">
+{
+  "directionId": "652e52a294e419f3199ba2d2",
+}</pre
+            >
+          </div>
+          <div class="response">
+            <strong>Response</strong>
+            <pre class="language-json">
+{
+  "error": false,
+  "message": "Direction (NASA) has been deleted successfully."
+}</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Create group -->
+      <section class="endpoint">
+        <p class="collapsible" id="title">
+          <span class="method" id="post">POST</span>
+          /admin/group
+          <span class="description">Create a new group</span>
+        </p>
+        <div class="content" style="display: none">
+          <div class="request">
+            <strong>Header</strong>
+            <pre class="language-css">Authorization: Bearer {token}</pre>
+            <strong>Request</strong>
+            <pre class="language-json">
+{
+  "directionId": "652e53d894e419f3199ba2e1",
+  "groupCode": "973002"
+}</pre
+            >
+          </div>
+          <div class="response">
+            <strong>Response</strong>
+            <pre class="language-json">
+{
+  "error": false,
+  "message": "Group (973002) is registered."
+}</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Update group -->
+      <section class="endpoint">
+        <p class="collapsible" id="title">
+          <span class="method" id="put">PUT</span>
+          /admin/group
+          <span class="description">Update a group</span>
+        </p>
+        <div class="content" style="display: none">
+          <div class="request">
+            <strong>Header</strong>
+            <pre class="language-css">Authorization: Bearer {token}</pre>
+            <strong>Request</strong>
+            <pre class="language-json">
+{
+  "directionId": "652e53d894e419f3199ba2e1",
+  "groupCodeBefore": "973002",
+  "groupCodeAfter": "973001"
+}</pre
+            >
+          </div>
+          <div class="response">
+            <strong>Response</strong>
+            <pre class="language-json">
+{
+  "error": false,
+  "message": "Group code has been updated successfully."
+}</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Delete group -->
+      <section class="endpoint">
+        <p class="collapsible" id="title">
+          <span class="method" id="delete">DELETE</span>
+          /admin/group
+          <span class="description">Delete a group</span>
+        </p>
+        <div class="content" style="display: none">
+          <div class="request">
+            <strong>Header</strong>
+            <pre class="language-css">Authorization: Bearer {token}</pre>
+            <strong>Request</strong>
+            <pre class="language-json">
+{
+  "directionId": "652e52a294e419f3199ba2d2",
+}</pre
+            >
+          </div>
+          <div class="response">
+            <strong>Response</strong>
+            <pre class="language-json">
+{
+  "error": false,
+  "message": "Direction (NASA) has been deleted successfully."
+}</pre
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-lucario.css"></script>
+    <script>
+      Prism.highlightAll();
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const coll = document.getElementsByClassName("collapsible");
+        for (let i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            const content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

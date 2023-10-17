@@ -37,9 +37,7 @@ async function sendVerificationEmail(req, token) {
                                   </tr>
                                   <tr>
                                       <td align="center">
-                                          <a href="${req.protocol}://${req.get(
-    "host"
-  )}/api/verify/${token}" style="background-color: #2d85c5; color: #fff; text-decoration: none; padding: 10px 30px; border-radius: 100px; font-weight: bold; font-size: 20px;">Verify Email</a>
+                                          <a href="${process.env.HOST_DEVELOPMENT}/api/verify/${token}" style="background-color: #2d85c5; color: #fff; text-decoration: none; padding: 10px 30px; border-radius: 100px; font-weight: bold; font-size: 20px;">Verify Email</a>
                                       </td>
                                   </tr>
                               </table>
