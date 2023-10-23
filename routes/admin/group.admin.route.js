@@ -12,7 +12,7 @@ async function createGroup(req, res, next) {
   }
 
   const newGroup = {
-    group_code: req.body.groupCode,
+    groupCode: req.body.groupCode,
   };
 
   try {
@@ -49,8 +49,8 @@ async function updateGroup(req, res, next) {
 
   try {
     const updatedGroup = await Direction.findOneAndUpdate(
-      { _id: directionId, "group.group_code": groupCodeBefore },
-      { $set: { "group.$.group_code": groupCodeAfter } },
+      { _id: directionId, "group.groupCode": groupCodeBefore },
+      { $set: { "group.$.groupCode": groupCodeAfter } },
       { new: true }
     );
 
@@ -88,7 +88,7 @@ async function deleteGroup(req, res, next) {
 
   try {
     const deletedGroup = direction.group.filter(
-      (group) => group.group_code !== groupCode
+      (group) => group.groupCode !== groupCode
     );
 
     direction.group = deletedGroup;

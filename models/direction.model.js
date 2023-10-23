@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const groupSchema = new mongoose.Schema({
-  group_code: {
+  groupCode: {
     type: String,
     required: false,
   },
@@ -13,7 +13,7 @@ const directionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    faculty_id: {
+    facultyId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Faculty",
       required: true,
@@ -25,5 +25,5 @@ const directionSchema = new mongoose.Schema(
   }
 );
 
-const Direction = mongoose.model("Direction2", directionSchema);
+const Direction = mongoose.model("Direction", directionSchema);
 module.exports = { Direction };

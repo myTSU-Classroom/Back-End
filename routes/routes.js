@@ -11,7 +11,8 @@ const setupRouter = (app, apiUrl) => {
   app.use(`${apiUrl}/admin`, adminRouter);
   app.use(`${apiUrl}/docs`, (req, res, next) => {
     return res.render("docs", {
-      logo: `${process.env.HOST_DEVELOPMENT}/wpf_books.svg`,
+      path: `${process.env.PUBLIC_PATH}`,
+      logo: `${process.env.HOST_URL}/wpf_books.svg`,
     });
   });
 };

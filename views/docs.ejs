@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/docs.css" type="text/css" />
+    <link rel="icon" href="<%= path %>/wpf_books.svg" />
+    <link rel="stylesheet" href="<%= path %>/docs.css" type="text/css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-lucario.css"
@@ -18,6 +19,23 @@
       <h1>API Documentation</h1>
     </header>
     <main>
+      <section class="guideline" style="padding-bottom: 20px">
+        <p
+          id="title"
+          style="
+            margin-left: 20px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+          "
+        >
+          Base URL
+        </p>
+        <a class="description" href="#" id="base_url"
+          >https://mytsuclassroom.my.id/api</a
+        >
+      </section>
+
       <!-- Get faculty -->
       <section class="endpoint">
         <p class="collapsible" id="title">
@@ -34,8 +52,8 @@
             <strong>Response</strong>
             <pre class="language-json">
 {
-    "_id":"65105348d5e17d0a4cc818bb",
-    "faculty":"Institute of Applied Mathematics and Computer Science"
+  "_id": "65354f3c8302539a6d924f82",
+  "faculty": "Institute of Applied Mathematics and Computer Science"
 }</pre
             >
           </div>
@@ -58,32 +76,32 @@
             <strong>Response</strong>
             <pre class="language-json">
 {
-  "_id": "6511922cce8b634aee5c5095",
+  "_id": "653552cfa8d8a94a41b29de5",
   "direction": "Fundamental Informatic and Informations Technology",
-  "faculty_id": "65105348d5e17d0a4cc818bb",
+  "facultyId": "65354f3c8302539a6d924f82",
   "group": [
     {
-      "_id": "6511a22fa6c81762cea204f5",
-      "group_code": "500101"
+      "_id": "653623ab76afb36db90df375",
+      "groupCode": "510101"
     },
     {
-      "_id": "6511a22fa6c81762cea204f6",
-      "group_code": "500102"
+      "_id": "653623ab76afb36db90df376",
+      "groupCode": "510102"
     },
     {
-      "_id": "6511a22fa6c81762cea204f7",
-      "group_code": "500103"
+      "_id": "653623ab76afb36db90df377",
+      "groupCode": "510103"
     },
     {
-      "_id": "6511a22fa6c81762cea204f8",
-      "group_code": "500104"
+      "_id": "653623ab76afb36db90df378",
+      "groupCode": "510104"
     },
     {
-      "_id": "6511a22fa6c81762cea204f9",
-      "group_code": "500105"
+      "_id": "653623ab76afb36db90df379",
+      "groupCode": "510105"
     }
   ]
-}</pre
+},</pre
             >
           </div>
         </div>
@@ -102,7 +120,7 @@
             <pre class="language-json">
 {
   "name": "String",
-  "birth_date": Number,
+  "birthDate": Number,
   "email": "String",
   "phone": "String",
   "role": "Student" / "Teacher",
@@ -110,8 +128,7 @@
   "direction": "String",
   "group": "String",
   "grade": Number,
-  "avatar": File,
-  "isAdmin": false,
+  "avatar": File
 }</pre
             >
           </div>
@@ -263,8 +280,9 @@
             <strong>Request</strong>
             <pre class="language-json">
 {
-  "directionId": "652e52a294e419f3199ba2d2",
-  "directionName": "NASA"
+  "directionId": "6536192176afb36db90df30b",
+  "directionName": "NASA",
+  "facultyId": "6536253b76afb36db90df3ba"
 }</pre
             >
           </div>
@@ -387,7 +405,8 @@
             <strong>Request</strong>
             <pre class="language-json">
 {
-  "directionId": "652e52a294e419f3199ba2d2",
+  "directionId": "6536192176afb36db90df30b",
+  "groupCode": "973003"
 }</pre
             >
           </div>
@@ -396,7 +415,7 @@
             <pre class="language-json">
 {
   "error": false,
-  "message": "Direction (NASA) has been deleted successfully."
+  "message": "Group code (973003) has been deleted successfully."
 }</pre
             >
           </div>

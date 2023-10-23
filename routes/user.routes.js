@@ -7,7 +7,6 @@ const passwordGenerator = require("generate-password");
 const { Token } = require("../models/token.model");
 const emailHelper = require("../helper/email.helper");
 const crypto = require("crypto");
-const path = require("path");
 
 /* Register user */
 const uploadAvatar = multer({ storage: avatarConfig });
@@ -22,11 +21,7 @@ router.post("/register", uploadAvatar.single("avatar"), async (req, res) => {
       });
     }
 
-    const avatarPath = `${req.protocol}://${req.get("host")}/uploads/avatar/${
-      req.file.filename
-    }`;
-
-    const isAdmin = req.body.isAdmin || false;
+    const avatarPath = `${process.env.HOST_URL}/uploads/avatar/${req.file.filename}`;
 
     var generatedPassword = passwordGenerator.generate({
       length: 16,
@@ -35,7 +30,7 @@ router.post("/register", uploadAvatar.single("avatar"), async (req, res) => {
 
     const user = new User({
       name: req.body.name,
-      birth_date: req.body.birth_date,
+      birthDate: req.body.birthDate,
       email: req.body.email,
       phone: req.body.phone,
       avatar: avatarPath,
@@ -45,7 +40,8 @@ router.post("/register", uploadAvatar.single("avatar"), async (req, res) => {
       group: req.body.group,
       grade: req.body.grade,
       password: generatedPassword,
-      isAdmin: isAdmin,
+      isAdmin: req.body.isAdmin || false,
+      isAdminVerified: req.body.isAdminVerified || false,
     });
 
     await user.save();

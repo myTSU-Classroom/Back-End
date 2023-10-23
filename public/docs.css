@@ -96,6 +96,21 @@ main {
   margin: 10px 30px 20px 30px;
 }
 
+.guideline {
+  background-color: #f5f5f5;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+#base_url {
+  font-size: 17px;
+  font-weight: 500;
+  color: #333333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .endpoint strong {
   font-weight: bold;
 }

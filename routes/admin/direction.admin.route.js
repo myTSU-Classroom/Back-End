@@ -25,7 +25,7 @@ async function createDirection(req, res, next) {
 
   const newDirection = new Direction({
     direction: req.body.directionName,
-    faculty_id: req.body.facultyId,
+    facultyId: req.body.facultyId,
   });
 
   try {
@@ -55,12 +55,13 @@ async function updateDirection(req, res, next) {
   }
 
   isDirectionExists.direction = req.body.directionName;
+  isDirectionExists.facultyId = req.body.facultyId;
 
   try {
     await isDirectionExists.save();
     return res.status(200).json({
       error: false,
-      message: "Direction is updated successfully.",
+      message: "Direction has been updated successfully.",
     });
   } catch (err) {
     return res.status(500).send({

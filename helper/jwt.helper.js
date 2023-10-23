@@ -73,7 +73,7 @@ async function validateAdminToken(req, res, next) {
     if (!user) {
       return res.status(404).json({
         error: true,
-        message: "User is not found.",
+        message: "Admin user is not found in the access token.",
       });
     }
 

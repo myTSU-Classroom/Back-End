@@ -10,10 +10,10 @@ router.get("/verify/:token", async (req, res) => {
 
     const verificationToken = await Token.findOne({ token: token });
 
-    if (!verificationToken || verificationToken.expiredAt < Date.now()) {
+    if (!verificationToken || Date.now() > verificationToken.expiredAt) {
       return res.status(400).render("email_confirmation", {
         message: "Invalid or expired verification token.",
-        logo: `${process.env.HOST_DEVELOPMENT}/wpf_books.svg`,
+        logo: `${process.env.HOST_URL}/wpf_books.svg`,
       });
     }
 
@@ -22,7 +22,7 @@ router.get("/verify/:token", async (req, res) => {
     if (!user) {
       return res.status(400).render("email_confirmation", {
         message: "User not found.",
-        logo: `${process.env.HOST_DEVELOPMENT}/wpf_books.svg`,
+        logo: `${process.env.HOST_URL}/wpf_books.svg`,
       });
     }
 
@@ -34,7 +34,7 @@ router.get("/verify/:token", async (req, res) => {
 
     return res.status(200).render("email_confirmation", {
       message: "Your email account has been verified.",
-      logo: `${process.env.HOST_DEVELOPMENT}/wpf_books.svg`,
+      logo: `${process.env.HOST_URL}/wpf_books.svg`,
     });
   } catch (err) {
     return res.status(400).send({

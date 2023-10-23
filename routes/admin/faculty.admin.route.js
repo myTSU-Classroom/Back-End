@@ -50,7 +50,7 @@ async function updateFaculty(req, res, next) {
     await isFacultyExist.save();
     return res.status(200).json({
       error: false,
-      message: "Faculty is updated successfully.",
+      message: "Faculty has been updated successfully.",
     });
   } catch (err) {
     console.error(err);

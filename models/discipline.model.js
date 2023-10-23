@@ -1,32 +1,37 @@
 const mongoose = require("mongoose");
 
-const disciplineSchema = new mongoose.Schema({
-  discipline: {
-    type: String,
-    required: true,
+const disciplineSchema = new mongoose.Schema(
+  {
+    discipline: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: false,
+    },
+    year: {
+      type: String,
+      required: true,
+    },
+    grade: {
+      type: String,
+      required: true,
+    },
+    reading_literature: {
+      type: [String],
+      required: false,
+    },
+    subject: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Subject",
+      required: true,
+    },
   },
-  description: {
-    type: String,
-    required: false,
-  },
-  year: {
-    type: String,
-    required: true,
-  },
-  grade: {
-    type: String,
-    required: true,
-  },
-  reading_literature: {
-    type: [String],
-    required: false,
-  },
-  subject: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Subject",
-    required: true,
-  },
-});
+  {
+    versionKey: false,
+  }
+);
 
 const DisciplineSchema = mongoose.model("Discipline", disciplineSchema);
 module.exports = { Discipline };

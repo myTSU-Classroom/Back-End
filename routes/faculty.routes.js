@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
   }
 
   const directions = await Direction.find({
-    faculty_id: new mongoose.Types.ObjectId(id),
+    facultyId: new mongoose.Types.ObjectId(id),
   });
 
   if (!directions || directions.length === 0) {
