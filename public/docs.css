@@ -46,27 +46,34 @@ main {
   margin: 0 auto;
   padding: 20px;
 }
+
 .method {
   font-size: 18px;
-  padding: 10px;
-  border-radius: 20px;
   font-weight: 700;
+  display: inline-block;
+  width: 90px;
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  text-align: center;
+  margin-right: 10px;
 }
 
 #get {
-  color: #28a745;
+  background-color: #28a745;
 }
 
 #post {
-  color: #ffc107;
+  background-color: #ffc107;
 }
 
 #delete {
-  color: #dc3545;
+  background-color: #dc3545;
 }
 
 #put {
-  color: #007bff;
+  background-color: #007bff;
 }
 
 #title {
@@ -74,14 +81,21 @@ main {
   font-weight: 600;
 }
 
+#title_base_url {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+}
+
 .collapsible {
   cursor: pointer;
   margin: 0;
-  padding: 15px;
+  padding: 10px;
 }
 
 .description {
   font-weight: 400;
+  font-size: 16px;
   margin-left: 20px;
 }
 
@@ -90,15 +104,18 @@ main {
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
+  padding: 0 10px 0 10px;
 }
 
 .content {
-  margin: 10px 30px 20px 30px;
+  margin: 10px;
 }
 
 .guideline {
   background-color: #f5f5f5;
   margin-bottom: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
 }
@@ -107,7 +124,7 @@ main {
   font-size: 17px;
   font-weight: 500;
   color: #333333;
-  text-decoration: none;
+  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -122,9 +139,32 @@ main {
   padding: 10px;
 }
 
+.sub_content {
+  color: #333;
+}
+
 @media only screen and (max-width: 768px) {
+  icon {
+    width: 26px;
+    height: 19px;
+    margin-right: 7px;
+  }
+
+  .mytsu {
+    font-size: 24px;
+  }
+
+  header h1 {
+    font-size: 20px;
+    line-height: 13px;
+  }
+
   .method {
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 14px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    width: 70px;
   }
 
   .collapsible {
@@ -132,20 +172,38 @@ main {
   }
 
   .endpoint pre {
-    font-size: 16px;
+    font-size: 13px;
     overflow-x: scroll;
   }
 
   #title {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .description {
     margin-left: 5px;
+    font-size: 12px;
+  }
+
+  #title_base_url {
+    font-size: 14px;
+  }
+
+  #base_url {
+    font-size: 14px;
+  }
+
+  .sub_content {
+    font-size: 13px;
   }
 }
 
 @media only screen and (max-width: 480px) {
+  header h1 {
+    font-size: 18px;
+    line-height: 13px;
+  }
+
   .method {
     font-size: 14px;
   }
@@ -155,7 +213,7 @@ main {
   }
 
   .endpoint pre {
-    font-size: 14px;
+    font-size: 12px;
     overflow-x: scroll;
   }
 }

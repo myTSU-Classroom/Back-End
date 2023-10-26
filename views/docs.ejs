@@ -14,26 +14,14 @@
   <body>
     <header>
       <h1 class="mytsu">
-        <img src="<%= logo %>" class="icon" /> MyTSU Classroom
+        <img src="<%= path %>/wpf_books.svg" class="icon" /> MyTSU Classroom
       </h1>
       <h1>API Documentation</h1>
     </header>
     <main>
-      <section class="guideline" style="padding-bottom: 20px">
-        <p
-          id="title"
-          style="
-            margin-left: 20px;
-            font-size: 18px;
-            font-weight: 700;
-            color: #333;
-          "
-        >
-          Base URL
-        </p>
-        <a class="description" href="#" id="base_url"
-          >https://mytsuclassroom.my.id/api</a
-        >
+      <section class="guideline">
+        <p id="title_base_url">Base URL</p>
+        <a href="#" id="base_url">https://mytsuclassroom.my.id/api</a>
       </section>
 
       <!-- Get faculty -->
@@ -44,11 +32,11 @@
           <span class="description">Get all faculties</span>
         </p>
         <div class="content" style="display: none">
-          <div class="request">
+          <div class="sub_content">
             <strong>Request</strong>
             <p>Empty</p>
           </div>
-          <div class="response">
+          <div class="sub_content">
             <strong>Response</strong>
             <pre class="language-json">
 {
@@ -68,11 +56,11 @@
           <span class="description">Get all directions and groups</span>
         </p>
         <div class="content" style="display: none">
-          <div class="request">
+          <div class="sub_content">
             <strong>Request</strong>
             <p>Empty</p>
           </div>
-          <div class="response">
+          <div class="sub_content">
             <strong>Response</strong>
             <pre class="language-json">
 {
@@ -115,7 +103,7 @@
           <span class="description">Create a new account</span>
         </p>
         <div class="content" style="display: none">
-          <div class="request">
+          <div class="sub_content">
             <strong>Request</strong>
             <pre class="language-json">
 {
@@ -132,7 +120,7 @@
 }</pre
             >
           </div>
-          <div class="response">
+          <div class="sub_content">
             <strong>Response</strong>
             <pre class="language-json">
 {
@@ -152,7 +140,7 @@
           <span class="description">Create a new faculty</span>
         </p>
         <div class="content" style="display: none">
-          <div class="request">
+          <div class="sub_content">
             <strong>Header</strong>
             <pre class="language-css">Authorization: Bearer {token}</pre>
             <strong>Request</strong>
@@ -162,7 +150,7 @@
 }</pre
             >
           </div>
-          <div class="response">
+          <div class="sub_content">
             <strong>Response</strong>
             <pre class="language-json">
 {
@@ -182,7 +170,7 @@
           <span class="description">Update a faculty</span>
         </p>
         <div class="content" style="display: none">
-          <div class="request">
+          <div class="sub_content">
             <strong>Header</strong>
             <pre class="language-css">Authorization: Bearer {token}</pre>
             <strong>Request</strong>
@@ -193,7 +181,7 @@
 }</pre
             >
           </div>
-          <div class="response">
+          <div class="sub_content">
             <strong>Response</strong>
             <pre class="language-json">
 {
@@ -213,7 +201,7 @@
           <span class="description">Delete a faculty</span>
         </p>
         <div class="content" style="display: none">
-          <div class="request">
+          <div class="sub_content">
             <strong>Header</strong>
             <pre class="language-css">Authorization: Bearer {token}</pre>
             <strong>Request</strong>
@@ -223,7 +211,7 @@
 }</pre
             >
           </div>
-          <div class="response">
+          <div class="sub_content">
             <strong>Response</strong>
             <pre class="language-json">
 {
@@ -243,7 +231,7 @@
           <span class="description">Create a new direction</span>
         </p>
         <div class="content" style="display: none">
-          <div class="request">
+          <div class="sub_content">
             <strong>Header</strong>
             <pre class="language-css">Authorization: Bearer {token}</pre>
             <strong>Request</strong>
@@ -254,7 +242,7 @@
 }</pre
             >
           </div>
-          <div class="response">
+          <div class="sub_content">
             <strong>Response</strong>
             <pre class="language-json">
 {
@@ -274,7 +262,7 @@
           <span class="description">Update a direction</span>
         </p>
         <div class="content" style="display: none">
-          <div class="request">
+          <div class="sub_content">
             <strong>Header</strong>
             <pre class="language-css">Authorization: Bearer {token}</pre>
             <strong>Request</strong>
@@ -286,7 +274,7 @@
 }</pre
             >
           </div>
-          <div class="response">
+          <div class="sub_content">
             <strong>Response</strong>
             <pre class="language-json">
 {
@@ -306,7 +294,7 @@
           <span class="description">Delete a direction</span>
         </p>
         <div class="content" style="display: none">
-          <div class="request">
+          <div class="sub_content">
             <strong>Header</strong>
             <pre class="language-css">Authorization: Bearer {token}</pre>
             <strong>Request</strong>
@@ -316,7 +304,7 @@
 }</pre
             >
           </div>
-          <div class="response">
+          <div class="sub_content">
             <strong>Response</strong>
             <pre class="language-json">
 {
@@ -336,7 +324,7 @@
           <span class="description">Create a new group</span>
         </p>
         <div class="content" style="display: none">
-          <div class="request">
+          <div class="sub_content">
             <strong>Header</strong>
             <pre class="language-css">Authorization: Bearer {token}</pre>
             <strong>Request</strong>
@@ -347,7 +335,7 @@
 }</pre
             >
           </div>
-          <div class="response">
+          <div class="sub_content">
             <strong>Response</strong>
             <pre class="language-json">
 {
@@ -367,7 +355,7 @@
           <span class="description">Update a group</span>
         </p>
         <div class="content" style="display: none">
-          <div class="request">
+          <div class="sub_content">
             <strong>Header</strong>
             <pre class="language-css">Authorization: Bearer {token}</pre>
             <strong>Request</strong>
@@ -379,7 +367,7 @@
 }</pre
             >
           </div>
-          <div class="response">
+          <div class="sub_content">
             <strong>Response</strong>
             <pre class="language-json">
 {
@@ -399,7 +387,7 @@
           <span class="description">Delete a group</span>
         </p>
         <div class="content" style="display: none">
-          <div class="request">
+          <div class="sub_content">
             <strong>Header</strong>
             <pre class="language-css">Authorization: Bearer {token}</pre>
             <strong>Request</strong>
@@ -410,7 +398,7 @@
 }</pre
             >
           </div>
-          <div class="response">
+          <div class="sub_content">
             <strong>Response</strong>
             <pre class="language-json">
 {
@@ -423,7 +411,6 @@
       </section>
     </main>
 
-    <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-lucario.css"></script>
     <script>
       Prism.highlightAll();
