@@ -71,7 +71,9 @@ router.post("/register", uploadAvatar.single("avatar"), async (req, res) => {
 /* Get all user */
 router.get("/user", async (req, res) => {
   try {
-    const user = await User.find();
+    const user = await User.find().select(
+      "-password -isAdmin -isAdminVerified -avatar -phone -birthDate"
+    );
 
     if (!user) {
       return res.status(400).json({
