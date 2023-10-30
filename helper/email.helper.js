@@ -1,5 +1,6 @@
 const { emailTransporter } = require("../configs/email.config");
 const path = require("path");
+require("dotenv/config");
 
 async function sendVerificationEmail(req, token) {
   const emailBody = `<!DOCTYPE html>
