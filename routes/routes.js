@@ -2,7 +2,6 @@ const facultyRouter = require("./faculty.routes");
 const userRouter = require("./user.routes");
 const emailRouter = require("./email.routes");
 const adminRouter = require("./admin.routes");
-require("dotenv/config");
 
 const setupRouter = (app, apiUrl) => {
   app.use(`${apiUrl}/faculty`, facultyRouter);

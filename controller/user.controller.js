@@ -3,6 +3,7 @@ const { Token } = require("../models/token.model");
 const emailHelper = require("../helper/email.helper");
 const crypto = require("crypto");
 const { User } = require("../models/user.model");
+require("dotenv/config");
 
 async function registerUser(req, res) {
   try {

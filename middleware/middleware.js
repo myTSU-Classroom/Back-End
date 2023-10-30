@@ -4,6 +4,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const path = require("path");
+require("dotenv/config");
 
 const setupMiddleware = (app) => {
   app.use(morgan("dev"));
