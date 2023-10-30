@@ -1,5 +1,5 @@
-const { Direction } = require("../../models/direction.model");
-const { Faculty } = require("../../models/faculty.model");
+const { Direction } = require("../models/direction.model");
+const { Faculty } = require("../models/faculty.model");
 
 /* Create a direction */
 async function createDirection(req, res, next) {

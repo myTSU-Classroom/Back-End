@@ -8,19 +8,25 @@ const {
   createFaculty,
   updateFaculty,
   deleteFaculty,
-} = require("./admin/faculty.admin.route");
+} = require("../controller/admin.faculty.controller");
 
 const {
   createDirection,
   updateDirection,
   deleteDirection,
-} = require("./admin/direction.admin.route");
+} = require("../controller/admin.direction.controller");
 
 const {
   createGroup,
   updateGroup,
   deleteGroup,
-} = require("./admin/group.admin.route");
+} = require("../controller/admin.group.controller");
+
+const {
+  createDiscipline,
+  updateDiscipline,
+  deleteDiscipline,
+} = require("../controller/discipline.controller");
 
 /* Faculty */
 // Create a faculty
@@ -51,5 +57,15 @@ router.put("/group", validateAdminToken, upload.none(), updateGroup);
 
 // Delete a group
 router.delete("/group", validateAdminToken, upload.none(), deleteGroup);
+
+/* Discipline */
+// Create a discipline
+router.post("/", validateAdminToken, upload.none(), createDiscipline);
+
+// Update a discipline
+router.put("/", validateAdminToken, upload.none(), updateDiscipline);
+
+// Delete a discipline
+router.delete("/", validateAdminToken, upload.none(), deleteDiscipline);
 
 module.exports = router;

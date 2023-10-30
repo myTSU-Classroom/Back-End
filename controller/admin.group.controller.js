@@ -1,4 +1,4 @@
-const { Direction } = require("../../models/direction.model");
+const { Direction } = require("../models/direction.model");
 
 /* Create a group */
 async function createGroup(req, res, next) {
