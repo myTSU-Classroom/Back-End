@@ -3,6 +3,7 @@ require("dotenv/config");
 const secret = "" + process.env.JWT_SECRET;
 const { User } = require("../models/user.model");
 
+// Validate user credentials
 async function validateToken(req, res, next) {
   const authorizationHeader = req.headers.authorization;
 
@@ -45,6 +46,7 @@ async function validateToken(req, res, next) {
   }
 }
 
+// Validate admin credentials
 async function validateAdminToken(req, res, next) {
   const authorizationHeader = req.headers.authorization;
 
