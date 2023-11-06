@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
+const constant = require("../middleware/constants");
 
-const setupDatabase = (dbConnection, dbName) => {
+const setupDatabase = () => {
   mongoose
-    .connect(dbConnection, {
+    .connect(constant.dbConnection, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      dbName: dbName,
+      dbName: constant.dbName,
     })
     .then(() => {
       console.log("Database connected...");

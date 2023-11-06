@@ -3,7 +3,7 @@ const { Token } = require("../models/token.model");
 const emailHelper = require("../helper/email.helper");
 const crypto = require("crypto");
 const { User } = require("../models/user.model");
-require("dotenv/config");
+const constant = require("../middleware/constants");
 
 async function registerUser(req, res) {
   try {
@@ -16,7 +16,7 @@ async function registerUser(req, res) {
       });
     }
 
-    const avatarPath = `${process.env.HOST_URL}/uploads/avatar/${req.file.filename}`;
+    const avatarPath = `${constant.hostUrl}/uploads/avatar/${req.file.filename}`;
 
     var generatedPassword = passwordGenerator.generate({
       length: 16,

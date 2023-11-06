@@ -4,433 +4,83 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="<%= path %>/wpf_books.svg" />
-    <link rel="stylesheet" href="<%= path %>/docs.css" type="text/css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-lucario.css"
-    />
+    <link rel="stylesheet" href="<%= path %>/docs/docs.css" />
+    <link rel="stylesheet" href="<%= path %>/docs/prism.theme.css" />
+
     <title>API Documentation</title>
   </head>
   <body>
+    <!-- Header -->
     <header>
-      <h1 class="mytsu">
-        <img src="<%= path %>/wpf_books.svg" class="icon" /> MyTSU Classroom
-      </h1>
-      <h1>API Documentation</h1>
+      <div class="mytsu">
+        <img src="<%= path %>/wpf_books.svg" />
+        <p>MyTSU Classroom</p>
+      </div>
+      <p class="title_docs">API Documentation</p>
     </header>
+
     <main>
+      <!-- Base URL -->
       <section class="guideline">
-        <p id="title_base_url">Base URL</p>
-        <a href="#" id="base_url">https://mytsuclassroom.my.id/api</a>
+        <p class="guideline_title">Base URL</p>
+        <p class="guideline_link">https://mytsuclassroom.my.id/api</p>
       </section>
 
-      <!-- Get faculty -->
-      <section class="endpoint">
-        <p class="collapsible" id="title">
-          <span class="method" id="get">GET</span>
-          /faculty
-          <span class="description">Get all faculties</span>
-        </p>
-        <div class="content" style="display: none">
-          <div class="sub_content">
-            <strong>Request</strong>
-            <p>Empty</p>
+      <!-- Endpoints -->
+      <% for (let item of jsonData) { %>
+      <section class="accordion">
+        <div class="collapsible">
+          <div class="label">
+            <p class="method" id="<%= item.method %>"><%= item.method %></p>
+            <p class="endpoint"><%= item.endpoint %></p>
+            <p class="endpoint_desc"><%= item.description %></p>
           </div>
-          <div class="sub_content">
-            <strong>Response</strong>
-            <pre class="language-json">
-{
-  "_id": "65354f3c8302539a6d924f82",
-  "faculty": "Institute of Applied Mathematics and Computer Science"
-}</pre
-            >
+          <div class="content">
+            <div class="sub_content">
+              <p class="command">Authorization</p>
+              <% if (item.authorization) { %>
+              <pre><code class="language-json"><%- item.authorization %></code></pre>
+              <% } else { %>
+              <p class="command_content">Empty</p>
+              <% } %>
+            </div>
+            <div class="sub_content">
+              <p class="command">Request</p>
+              <% if (item.request) { %>
+              <pre><code class="language-json"><%- JSON.stringify(item.request, null, 2) %></code></pre>
+              <% } else { %>
+              <p class="command_content">Empty</p>
+              <% } %>
+            </div>
+            <div class="sub_content">
+              <p class="command">Response</p>
+              <pre><code class="language-json"><%- JSON.stringify(item.response, null, 2) %></code></pre>
+            </div>
           </div>
         </div>
       </section>
-
-      <!-- Get direction and group -->
-      <section class="endpoint">
-        <p class="collapsible" id="title">
-          <span class="method" id="get">GET</span>
-          /faculty/{faculty_id}
-          <span class="description">Get all directions and groups</span>
-        </p>
-        <div class="content" style="display: none">
-          <div class="sub_content">
-            <strong>Request</strong>
-            <p>Empty</p>
-          </div>
-          <div class="sub_content">
-            <strong>Response</strong>
-            <pre class="language-json">
-{
-  "_id": "653552cfa8d8a94a41b29de5",
-  "direction": "Fundamental Informatic and Informations Technology",
-  "facultyId": "65354f3c8302539a6d924f82",
-  "group": [
-    {
-      "_id": "653623ab76afb36db90df375",
-      "groupCode": "510101"
-    },
-    {
-      "_id": "653623ab76afb36db90df376",
-      "groupCode": "510102"
-    },
-    {
-      "_id": "653623ab76afb36db90df377",
-      "groupCode": "510103"
-    },
-    {
-      "_id": "653623ab76afb36db90df378",
-      "groupCode": "510104"
-    },
-    {
-      "_id": "653623ab76afb36db90df379",
-      "groupCode": "510105"
-    }
-  ]
-},</pre
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- Create user -->
-      <section class="endpoint">
-        <p class="collapsible" id="title">
-          <span class="method" id="post">POST</span>
-          /register
-          <span class="description">Create a new account</span>
-        </p>
-        <div class="content" style="display: none">
-          <div class="sub_content">
-            <strong>Request</strong>
-            <pre class="language-json">
-{
-  "name": "String",
-  "birthDate": Number,
-  "email": "String",
-  "phone": "String",
-  "role": "Student" / "Teacher",
-  "faculty": "String",
-  "direction": "String",
-  "group": "String",
-  "grade": Number,
-  "avatar": File
-}</pre
-            >
-          </div>
-          <div class="sub_content">
-            <strong>Response</strong>
-            <pre class="language-json">
-{
-  "error": false,
-  "message": "User data has been saved.",
-}</pre
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- Create faculty -->
-      <section class="endpoint">
-        <p class="collapsible" id="title">
-          <span class="method" id="post">POST</span>
-          /admin/faculty
-          <span class="description">Create a new faculty</span>
-        </p>
-        <div class="content" style="display: none">
-          <div class="sub_content">
-            <strong>Header</strong>
-            <pre class="language-css">Authorization: Bearer {token}</pre>
-            <strong>Request</strong>
-            <pre class="language-json">
-{
-  "facultyName": "Fakultas Kedokteran"
-}</pre
-            >
-          </div>
-          <div class="sub_content">
-            <strong>Response</strong>
-            <pre class="language-json">
-{
-  "error": false,
-  "message": "Faculty (Fakultas Kedokteran) is registered."
-}</pre
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- Update faculty -->
-      <section class="endpoint">
-        <p class="collapsible" id="title">
-          <span class="method" id="put">PUT</span>
-          /admin/faculty
-          <span class="description">Update a faculty</span>
-        </p>
-        <div class="content" style="display: none">
-          <div class="sub_content">
-            <strong>Header</strong>
-            <pre class="language-css">Authorization: Bearer {token}</pre>
-            <strong>Request</strong>
-            <pre class="language-json">
-{
-  "facultyId": "652e4e4994e419f3199ba2be",
-  "facultyName": "Fakultas Ilmu Kedokteran"
-}</pre
-            >
-          </div>
-          <div class="sub_content">
-            <strong>Response</strong>
-            <pre class="language-json">
-{
-  "error": false,
-  "message": "Faculty has been updated successfully."
-}</pre
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- Delete faculty -->
-      <section class="endpoint">
-        <p class="collapsible" id="title">
-          <span class="method" id="delete">DELETE</span>
-          /admin/faculty
-          <span class="description">Delete a faculty</span>
-        </p>
-        <div class="content" style="display: none">
-          <div class="sub_content">
-            <strong>Header</strong>
-            <pre class="language-css">Authorization: Bearer {token}</pre>
-            <strong>Request</strong>
-            <pre class="language-json">
-{
-  "facultyId": "652e4e4994e419f3199ba2be",
-}</pre
-            >
-          </div>
-          <div class="sub_content">
-            <strong>Response</strong>
-            <pre class="language-json">
-{
-  "error": false,
-  "message": "Faculty (Fakultas Kedokteran) has been deleted successfully."
-}</pre
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- Create direction -->
-      <section class="endpoint">
-        <p class="collapsible" id="title">
-          <span class="method" id="post">POST</span>
-          /admin/direction
-          <span class="description">Create a new direction</span>
-        </p>
-        <div class="content" style="display: none">
-          <div class="sub_content">
-            <strong>Header</strong>
-            <pre class="language-css">Authorization: Bearer {token}</pre>
-            <strong>Request</strong>
-            <pre class="language-json">
-{
-  "facultyId": "652d3a0f5c034077868f29c2",
-  "directionName": "SpaceX"
-}</pre
-            >
-          </div>
-          <div class="sub_content">
-            <strong>Response</strong>
-            <pre class="language-json">
-{
-  "error": false,
-  "message": "Direction (SpaceX) is registered."
-}</pre
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- Update direction -->
-      <section class="endpoint">
-        <p class="collapsible" id="title">
-          <span class="method" id="put">PUT</span>
-          /admin/direction
-          <span class="description">Update a direction</span>
-        </p>
-        <div class="content" style="display: none">
-          <div class="sub_content">
-            <strong>Header</strong>
-            <pre class="language-css">Authorization: Bearer {token}</pre>
-            <strong>Request</strong>
-            <pre class="language-json">
-{
-  "directionId": "6536192176afb36db90df30b",
-  "directionName": "NASA",
-  "facultyId": "6536253b76afb36db90df3ba"
-}</pre
-            >
-          </div>
-          <div class="sub_content">
-            <strong>Response</strong>
-            <pre class="language-json">
-{
-  "error": false,
-  "message": "Direction has been updated successfully."
-}</pre
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- Delete direction -->
-      <section class="endpoint">
-        <p class="collapsible" id="title">
-          <span class="method" id="delete">DELETE</span>
-          /admin/direction
-          <span class="description">Delete a direction</span>
-        </p>
-        <div class="content" style="display: none">
-          <div class="sub_content">
-            <strong>Header</strong>
-            <pre class="language-css">Authorization: Bearer {token}</pre>
-            <strong>Request</strong>
-            <pre class="language-json">
-{
-  "directionId": "652e52a294e419f3199ba2d2",
-}</pre
-            >
-          </div>
-          <div class="sub_content">
-            <strong>Response</strong>
-            <pre class="language-json">
-{
-  "error": false,
-  "message": "Direction (NASA) has been deleted successfully."
-}</pre
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- Create group -->
-      <section class="endpoint">
-        <p class="collapsible" id="title">
-          <span class="method" id="post">POST</span>
-          /admin/group
-          <span class="description">Create a new group</span>
-        </p>
-        <div class="content" style="display: none">
-          <div class="sub_content">
-            <strong>Header</strong>
-            <pre class="language-css">Authorization: Bearer {token}</pre>
-            <strong>Request</strong>
-            <pre class="language-json">
-{
-  "directionId": "652e53d894e419f3199ba2e1",
-  "groupCode": "973002"
-}</pre
-            >
-          </div>
-          <div class="sub_content">
-            <strong>Response</strong>
-            <pre class="language-json">
-{
-  "error": false,
-  "message": "Group (973002) is registered."
-}</pre
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- Update group -->
-      <section class="endpoint">
-        <p class="collapsible" id="title">
-          <span class="method" id="put">PUT</span>
-          /admin/group
-          <span class="description">Update a group</span>
-        </p>
-        <div class="content" style="display: none">
-          <div class="sub_content">
-            <strong>Header</strong>
-            <pre class="language-css">Authorization: Bearer {token}</pre>
-            <strong>Request</strong>
-            <pre class="language-json">
-{
-  "directionId": "652e53d894e419f3199ba2e1",
-  "groupCodeBefore": "973002",
-  "groupCodeAfter": "973001"
-}</pre
-            >
-          </div>
-          <div class="sub_content">
-            <strong>Response</strong>
-            <pre class="language-json">
-{
-  "error": false,
-  "message": "Group code has been updated successfully."
-}</pre
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- Delete group -->
-      <section class="endpoint">
-        <p class="collapsible" id="title">
-          <span class="method" id="delete">DELETE</span>
-          /admin/group
-          <span class="description">Delete a group</span>
-        </p>
-        <div class="content" style="display: none">
-          <div class="sub_content">
-            <strong>Header</strong>
-            <pre class="language-css">Authorization: Bearer {token}</pre>
-            <strong>Request</strong>
-            <pre class="language-json">
-{
-  "directionId": "6536192176afb36db90df30b",
-  "groupCode": "973003"
-}</pre
-            >
-          </div>
-          <div class="sub_content">
-            <strong>Response</strong>
-            <pre class="language-json">
-{
-  "error": false,
-  "message": "Group code (973003) has been deleted successfully."
-}</pre
-            >
-          </div>
-        </div>
-      </section>
+      <% } %>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-lucario.css"></script>
-    <script>
-      Prism.highlightAll();
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const coll = document.getElementsByClassName("collapsible");
-        for (let i = 0; i < coll.length; i++) {
-          coll[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            const content = this.nextElementSibling;
-            if (content.style.display === "block") {
-              content.style.display = "none";
-            } else {
-              content.style.display = "block";
-            }
-          });
-        }
-      });
-    </script>
   </body>
+  <script src="<%= path %>/docs/prism.js"></script>
+  <script nonce="<%= nonce %>">
+    document.addEventListener("DOMContentLoaded", function () {
+      document
+        .querySelectorAll("code[class^='language-']")
+        .forEach(function (element) {
+          element.innerHTML = element.innerHTML.trim();
+        });
+
+      Prism.highlightAll();
+    });
+  </script>
+  <script nonce="<%= nonce %>">
+    const label = document.getElementsByClassName("label");
+
+    for (let i = 0; i < label.length; i++) {
+      label[i].addEventListener("click", function () {
+        this.parentElement.classList.toggle("active");
+      });
+    }
+  </script>
 </html>

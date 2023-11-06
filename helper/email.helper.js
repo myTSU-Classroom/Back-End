@@ -1,6 +1,6 @@
 const { emailTransporter } = require("../configs/email.config");
 const path = require("path");
-require("dotenv/config");
+const constant = require("../middleware/constants");
 
 async function sendVerificationEmail(req, token) {
   const emailBody = `<!DOCTYPE html>
@@ -38,7 +38,7 @@ async function sendVerificationEmail(req, token) {
                                   </tr>
                                   <tr>
                                       <td align="center">
-                                          <a href="${process.env.HOST_URL}/api/verify/${token}" style="background-color: #2d85c5; color: #fff; text-decoration: none; padding: 10px 30px; border-radius: 100px; font-weight: bold; font-size: 20px;">Verify Email</a>
+                                          <a href="${constant.hostUrl}/api/verify/${token}" style="background-color: #2d85c5; color: #fff; text-decoration: none; padding: 10px 30px; border-radius: 100px; font-weight: bold; font-size: 20px;">Verify Email</a>
                                       </td>
                                   </tr>
                               </table>

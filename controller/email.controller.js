@@ -1,9 +1,9 @@
 const { User } = require("../models/user.model");
 const { Token } = require("../models/token.model");
-require("dotenv/config");
+const constant = require("../middleware/constants");
 
 async function verifyEmail(req, res) {
-  const publicPath = `${process.env.HOST_URL}${process.env.API_URL}/public`;
+  const publicPath = `${constant.hostUrl}${constant.apiUrl}/public`;
 
   try {
     const token = req.params.token;

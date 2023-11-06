@@ -1,0 +1,207 @@
+[
+  {
+    "id": 1,
+    "method": "GET",
+    "endpoint": "/faculty",
+    "description": "Get all faculties",
+    "authorization": null,
+    "request": null,
+    "response": {
+      "_id": "65354f3c8302539a6d924f82",
+      "faculty": "Institute of Applied Mathematics and Computer Science"
+    }
+  },
+  {
+    "id": 2,
+    "method": "GET",
+    "endpoint": "/faculty/{faculty_id}",
+    "description": "Get all directions and groups",
+    "authorization": null,
+    "request": null,
+    "response": {
+      "_id": "653552cfa8d8a94a41b29de5",
+      "direction": "Fundamental Informatic and Informations Technology",
+      "facultyId": "65354f3c8302539a6d924f82",
+      "group": [
+        {
+          "_id": "653623ab76afb36db90df375",
+          "groupCode": "510101"
+        },
+        {
+          "_id": "653623ab76afb36db90df376",
+          "groupCode": "510102"
+        },
+        {
+          "_id": "653623ab76afb36db90df377",
+          "groupCode": "510103"
+        },
+        {
+          "_id": "653623ab76afb36db90df378",
+          "groupCode": "510104"
+        },
+        {
+          "_id": "653623ab76afb36db90df379",
+          "groupCode": "510105"
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "method": "POST",
+    "endpoint": "/register",
+    "description": "Create a new account",
+    "authorization": null,
+    "request": {
+      "name": "String",
+      "birthDate": "DATE in milliseconds (Number)",
+      "email": "String",
+      "phone": "String",
+      "role": "Student&#34; &#47; &#34;Teacher",
+      "faculty": "String",
+      "direction": "String",
+      "group": "String",
+      "grade": "Number",
+      "avatar": "File"
+    },
+    "response": {
+      "error": false,
+      "message": "User data has been saved."
+    }
+  },
+  {
+    "id": 4,
+    "method": "POST",
+    "endpoint": "/admin/faculty",
+    "description": "Create a new faculty",
+    "authorization": "Authorization: Bearer &lt;token&gt;",
+    "request": {
+      "facultyId": "652e4e4994e419f3199ba2be",
+      "facultyName": "Fakultas Kedokteran"
+    },
+    "response": {
+      "error": false,
+      "message": "Faculty (Fakultas Kedokteran) is registered."
+    }
+  },
+  {
+    "id": 5,
+    "method": "PUT",
+    "endpoint": "/admin/faculty",
+    "description": "Update a faculty",
+    "authorization": "Authorization: Bearer &lt;token&gt;",
+    "request": {
+      "facultyId": "652e4e4994e419f3199ba2be",
+      "facultyName": "Fakultas Ilmu Kedokteran"
+    },
+    "response": {
+      "error": false,
+      "message": "Faculty has been updated successfully."
+    }
+  },
+  {
+    "id": 6,
+    "method": "DELETE",
+    "endpoint": "/admin/faculty",
+    "description": "Delete a faculty",
+    "authorization": "Authorization: Bearer &lt;token&gt;",
+    "request": {
+      "facultyId": "652e4e4994e419f3199ba2be"
+    },
+    "response": {
+      "error": false,
+      "message": "Faculty (Fakultas Kedokteran) has been deleted successfully."
+    }
+  },
+  {
+    "id": 7,
+    "method": "POST",
+    "endpoint": "/admin/direction",
+    "description": "Create a new direction",
+    "authorization": "Authorization: Bearer &lt;token&gt;",
+    "request": {
+      "facultyId": "652d3a0f5c034077868f29c2",
+      "directionName": "SpaceX"
+    },
+    "response": {
+      "error": false,
+      "message": "Direction (SpaceX) is registered."
+    }
+  },
+  {
+    "id": 8,
+    "method": "PUT",
+    "endpoint": "/admin/direction",
+    "description": "Update a direction",
+    "authorization": "Authorization: Bearer &lt;token&gt;",
+    "request": {
+      "directionId": "6536192176afb36db90df30b",
+      "directionName": "NASA",
+      "facultyId": "6536253b76afb36db90df3ba"
+    },
+    "response": {
+      "error": false,
+      "message": "Direction has been updated successfully."
+    }
+  },
+  {
+    "id": 9,
+    "method": "DELETE",
+    "endpoint": "/admin/direction",
+    "description": "Delete a direction",
+    "authorization": "Authorization: Bearer &lt;token&gt;",
+    "request": {
+      "directionId": "652e52a294e419f3199ba2d2"
+    },
+    "response": {
+      "error": false,
+      "message": "Direction (NASA) has been deleted successfully."
+    }
+  },
+  {
+    "id": 10,
+    "method": "POST",
+    "endpoint": "/admin/group",
+    "description": "Create a new group",
+    "authorization": "Authorization: Bearer &lt;token&gt;",
+    "request": {
+      "directionId": "652e53d894e419f3199ba2e1",
+      "groupCode": "973002"
+    },
+    "response": {
+      "error": false,
+      "message": "Group (973002) is registered."
+    }
+  },
+  {
+    "id": 11,
+    "method": "PUT",
+    "endpoint": "/admin/group",
+    "description": "Update a group",
+    "authorization": "Authorization: Bearer &lt;token&gt;",
+    "request": {
+      "directionId": "652e53d894e419f3199ba2e1",
+      "groupCodeBefore": "973002",
+      "groupCodeAfter": "973001"
+    },
+    "response": {
+      "error": false,
+      "message": "Group code has been updated successfully."
+    }
+  },
+  {
+    "id": 12,
+    "method": "DELETE",
+    "endpoint": "/admin/group",
+    "description": "Delete a group",
+    "authorization": "Authorization: Bearer &lt;token&gt;",
+    "request": {
+      "directionId": "6536192176afb36db90df30b",
+      "groupCode": "973003"
+    },
+    "response": {
+      "error": false,
+      "message": "Group code (973003) has been deleted successfully."
+    }
+  }
+]

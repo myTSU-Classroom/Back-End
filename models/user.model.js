@@ -41,13 +41,13 @@ const userSchema = new mongoose.Schema(
       },
     },
     group: {
-      type: String,
+      type: Number,
       when: {
         role: "Student",
       },
     },
     grade: {
-      type: String,
+      type: Number,
       when: {
         role: "Student",
       },

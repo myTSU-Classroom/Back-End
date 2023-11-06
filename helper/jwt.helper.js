@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
-require("dotenv/config");
-const secret = "" + process.env.JWT_SECRET;
+const constant = require("../middleware/constants");
+const secret = constant.jwtSecret;
 const { User } = require("../models/user.model");
 
 // Validate user credentials
