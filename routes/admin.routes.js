@@ -60,12 +60,17 @@ router.delete("/group", validateAdminToken, upload.none(), deleteGroup);
 
 /* Discipline */
 // Create a discipline
-router.post("/", validateAdminToken, upload.none(), createDiscipline);
+router.post("/discipline", validateAdminToken, upload.none(), createDiscipline);
 
 // Update a discipline
-router.put("/", validateAdminToken, upload.none(), updateDiscipline);
+router.put("/discipline", validateAdminToken, upload.none(), updateDiscipline);
 
 // Delete a discipline
-router.delete("/", validateAdminToken, upload.none(), deleteDiscipline);
+router.delete(
+  "/discipline",
+  validateAdminToken,
+  upload.none(),
+  deleteDiscipline
+);
 
 module.exports = router;

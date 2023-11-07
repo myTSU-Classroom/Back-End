@@ -1,35 +1,19 @@
 const mongoose = require("mongoose");
 
-const descriptionSchema = new mongoose.Schema({
-  plainContent: {
-    type: String,
-    required: true,
-  },
-  htmlContent: {
-    type: String,
-    required: true,
-  },
-});
-
-const readingLiteratureSchema = new mongoose.Schema({
-  plainContent: {
-    type: String,
-    required: true,
-  },
-  htmlContent: {
-    type: String,
-    required: true,
-  },
-});
-
 const disciplineSchema = new mongoose.Schema(
   {
     discipline: {
       type: String,
       required: true,
     },
-    description: descriptionSchema,
-
+    description_plainContent: {
+      type: String,
+      required: true,
+    },
+    description_htmlContent: {
+      type: String,
+      required: true,
+    },
     year: {
       type: String,
       required: true,
@@ -38,9 +22,22 @@ const disciplineSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    reading_literature: readingLiteratureSchema,
+    readingAndLiterature_plainContent: {
+      type: String,
+      required: true,
+    },
+    readingAndLiterature_htmlContent: {
+      type: String,
+      required: true,
+    },
 
-    teacher: {
+    groupId: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Direction.group",
+      required: true,
+    },
+
+    teacherId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -61,6 +58,18 @@ const disciplineSchema = new mongoose.Schema(
       when: {
         method: "Offline",
       },
+    },
+    dayOfWeek: {
+      type: Number,
+      required: true,
+    },
+    startTime: {
+      type: String,
+      required: true,
+    },
+    finishTime: {
+      type: String,
+      required: true,
     },
   },
   {

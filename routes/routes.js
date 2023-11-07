@@ -7,7 +7,7 @@ const constant = require("../middleware/constants");
 
 const setupRouter = (app) => {
   const apiUrl = constant.apiUrl;
-  app.use(`${apiUrl}/faculty`, facultyRouter);
+  app.use(`${apiUrl}/`, facultyRouter);
   app.use(`${apiUrl}/`, userRouter);
   app.use(`${apiUrl}/`, emailRouter);
   app.use(`${apiUrl}/admin`, adminRouter);

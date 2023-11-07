@@ -5,10 +5,15 @@ const {
   getDirectionAndGroup,
 } = require("../controller/faculty.controller");
 
+const { getAllDiscipline } = require("../controller/discipline.controller");
+
 // Get faculty
-router.get("/", getFaculty);
+router.get("/faculty", getFaculty);
 
 // Get faculty's direction
-router.get("/:id", getDirectionAndGroup);
+router.get("/faculty/:id", getDirectionAndGroup);
+
+// Get all disciplines
+router.get("/discipline", getAllDiscipline);
 
 module.exports = router;

@@ -31,18 +31,25 @@ async function getDirectionAndGroup(req, res) {
     });
   }
 
-  const directions = await Direction.find({
-    facultyId: new mongoose.Types.ObjectId(id),
-  });
+  try {
+    const directions = await Direction.find({
+      facultyId: new mongoose.Types.ObjectId(id),
+    });
 
-  if (!directions || directions.length === 0) {
-    return res.status(404).json({
+    if (!directions || directions.length === 0) {
+      return res.status(404).json({
+        error: true,
+        message: "Directions not found",
+      });
+    }
+
+    return res.status(200).json(directions);
+  } catch (err) {
+    return res.status(400).json({
       error: true,
-      message: "Directions not found",
+      message: err.message,
     });
   }
-
-  res.json(directions);
 }
 
 module.exports = {

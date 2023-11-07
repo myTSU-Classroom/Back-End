@@ -1,9 +1,32 @@
 const { Discipline } = require("../models/discipline.model");
+const mongoose = require("mongoose");
 
 // Create a new discipline
 async function createDiscipline(req, res, next) {
   try {
-    const newDiscipline = new Discipline(req.body);
+    const teacherId = new mongoose.Types.ObjectId(req.body.teacherId);
+    const groupId = new mongoose.Types.ObjectId(req.body.groupId);
+
+    const newDiscipline = new Discipline({
+      discipline: req.body.disciplineName,
+      description_plainContent: req.body.description_plainContent,
+      description_htmlContent: req.body.description_htmlContent,
+      year: req.body.year,
+      grade: req.body.grade,
+      readingAndLiterature_plainContent:
+        req.body.readingAndLiterature_plainContent,
+      readingAndLiterature_htmlContent:
+        req.body.readingAndLiterature_htmlContent,
+      groupId: groupId,
+      teacherId: teacherId,
+      method: req.body.method,
+      building: req.body.building,
+      room: req.body.room,
+      dayOfWeek: req.body.dayOfWeek,
+      startTime: req.body.startTime,
+      finishTime: req.body.finishTime,
+    });
+
     await newDiscipline.save();
     res.status(201).send({
       error: false,
@@ -17,9 +40,29 @@ async function createDiscipline(req, res, next) {
   }
 }
 
+// Read all disciplines
+async function getAllDiscipline(req, res, next) {
+  try {
+    const discipline = await Discipline.find();
+
+    if (discipline.length === 0) {
+      return res.status(404).json({
+        error: true,
+        message: "There is no discipline found.",
+      });
+    }
+    return res.status(200).json(discipline);
+  } catch (err) {
+    return res.status(400).json({
+      error: true,
+      message: err.message,
+    });
+  }
+}
+
 // Update a discipline
 async function updateDiscipline(req, res, next) {
-  const disciplineId = req.params.disciplineId;
+  const disciplineId = req.body.disciplineId;
   const isDisciplineExists = await Discipline.findById(disciplineId);
 
   if (!isDisciplineExists) {
@@ -30,7 +73,32 @@ async function updateDiscipline(req, res, next) {
   }
 
   try {
-    await Discipline.findByIdAndUpdate(req.params.disciplineId, req.body, {
+    const teacherId = new mongoose.Types.ObjectId(req.body.teacherId);
+    const groupId = new mongoose.Types.ObjectId(req.body.groupId);
+
+    const updatedDiscipline = {
+      discipline: req.body.disciplineName,
+      description: req.body.description,
+      year: req.body.year,
+      grade: req.body.grade,
+      readingAndLiterature: req.body.readingAndLiterature,
+      groupId: groupId,
+      teacherId: teacherId,
+      method: req.body.method,
+      dayOfWeek: req.body.dayOfWeek,
+      startTime: req.body.startTime,
+      finishTime: req.body.finishTime,
+    };
+
+    if (req.body.method === "Online") {
+      updatedDiscipline.building = null;
+      updatedDiscipline.room = null;
+    } else {
+      updatedDiscipline.building = req.body.building;
+      updatedDiscipline.room = req.body.room;
+    }
+
+    await Discipline.findByIdAndUpdate(disciplineId, updatedDiscipline, {
       new: true,
     });
 
@@ -48,7 +116,7 @@ async function updateDiscipline(req, res, next) {
 
 // Delete a discipline
 async function deleteDiscipline(req, res, next) {
-  const disciplineId = req.params.disciplineId;
+  const disciplineId = req.body.disciplineId;
   const isDisciplineExists = await Discipline.findById(disciplineId);
 
   if (!isDisciplineExists) {
@@ -75,6 +143,7 @@ async function deleteDiscipline(req, res, next) {
 
 module.exports = {
   createDiscipline,
+  getAllDiscipline,
   updateDiscipline,
   deleteDiscipline,
 };
