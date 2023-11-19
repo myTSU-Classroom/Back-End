@@ -232,6 +232,32 @@
   },
   {
     "id": 14,
+    "method": "GET",
+    "endpoint": "/discipline?groupId={groupId}",
+    "description": "Get disciplines based on Group ID",
+    "authorization": null,
+    "request": "url example {BASE_URL}/api/discipline?groupId=654a2802be9cb9ed2d0e7f2e",
+    "response": {
+      "_id": "654a335d4d420c6b3b70014c",
+      "discipline": "Software Development Process",
+      "description_plainContent": "Description",
+      "description_htmlContent": "&#60;p&#62;Description&#60;&#47;p&#62;",
+      "year": "2023-2024",
+      "grade": "4",
+      "readingAndLiterature_plainContent": "Reading and Literature",
+      "readingAndLiterature_htmlContent": "&#60;p&#62;Reading and Literature&#60;&#47;p&#62;",
+      "groupId": "654a2802be9cb9ed2d0e7f2e",
+      "teacherId": "6536135e3ef384f6c7fb3893",
+      "method": "Offline",
+      "building": "2",
+      "room": "233",
+      "dayOfWeek": 2,
+      "startTime": "14:45",
+      "finishTime": "16:00"
+    }
+  },
+  {
+    "id": 15,
     "method": "POST",
     "endpoint": "/admin/discipline",
     "description": "Create a discipline",
@@ -259,7 +285,7 @@
     }
   },
   {
-    "id": 15,
+    "id": 16,
     "method": "PUT",
     "endpoint": "/admin/discipline",
     "description": "Update a discipline",
@@ -286,7 +312,7 @@
     }
   },
   {
-    "id": 16,
+    "id": 17,
     "method": "DELETE",
     "endpoint": "/admin/discipline",
     "description": "Delete a discipline",
