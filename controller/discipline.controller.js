@@ -40,9 +40,32 @@ async function createDiscipline(req, res, next) {
   }
 }
 
-// Read all disciplines
+// Read all disciplines and discipline by Group Id
 async function getAllDiscipline(req, res, next) {
   try {
+    if (req.query.groupId !== undefined) {
+      const id = req.query.groupId;
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({
+          error: true,
+          message: "Invalid ObjectId format",
+        });
+      }
+
+      const discipline = await Discipline.find({
+        groupId: new mongoose.Types.ObjectId(id),
+      });
+
+      if (discipline.length === 0) {
+        return res.status(404).json({
+          error: true,
+          message: "There is no discipline found.",
+        });
+      }
+      return res.status(200).json(discipline);
+    }
+
     const discipline = await Discipline.find();
 
     if (discipline.length === 0) {
@@ -53,7 +76,7 @@ async function getAllDiscipline(req, res, next) {
     }
     return res.status(200).json(discipline);
   } catch (err) {
-    return res.status(400).json({
+    return res.status(500).json({
       error: true,
       message: err.message,
     });
