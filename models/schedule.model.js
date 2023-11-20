@@ -2,32 +2,43 @@ const mongoose = require("mongoose");
 
 const scheduleSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
+    disciplineId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Discipline",
       required: true,
     },
-    number_of_class: {
+    season: {
+      type: String,
+      enum: ["Autumn", "Spring"],
+      required: true,
+    },
+    method: {
+      type: String,
+      enum: ["Online", "Offline"],
+      required: true,
+    },
+    building: {
+      type: String,
+      when: {
+        method: "Offline",
+      },
+    },
+    room: {
+      type: String,
+      when: {
+        method: "Offline",
+      },
+    },
+    dayOfWeek: {
       type: Number,
       required: true,
     },
-    class_time: {
-      type: Date,
-      required: true,
-    },
-    place: {
+    startTime: {
       type: String,
       required: true,
     },
-    group: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Group",
-        required: true,
-      },
-    ],
-    subject: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Subject",
+    finishTime: {
+      type: String,
       required: true,
     },
   },

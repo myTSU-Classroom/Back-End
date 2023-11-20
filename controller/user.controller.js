@@ -4,6 +4,7 @@ const emailHelper = require("../helper/email.helper");
 const crypto = require("crypto");
 const { User } = require("../models/user.model");
 const constant = require("../middleware/constants");
+const mongoose = require("mongoose");
 
 async function registerUser(req, res) {
   try {
@@ -51,7 +52,7 @@ async function registerUser(req, res) {
     console.log("Sending email...");
     emailHelper.sendVerificationEmail(req, token.token);
 
-    return res.status(200).json({
+    return res.status(201).json({
       error: false,
       message: "User data has been saved.",
     });
@@ -65,8 +66,30 @@ async function registerUser(req, res) {
 
 async function getUser(req, res) {
   try {
+    if (req.query.userId !== undefined) {
+      if (!mongoose.Types.ObjectId.isValid(req.query.userId)) {
+        return res.status(400).json({
+          error: true,
+          message: "Invalid ObjectId format",
+        });
+      }
+
+      const user = await User.findById(req.query.userId).select(
+        "-isAdmin -isEmailVerified -isAdminVerified -password -birthDate -avatar"
+      );
+
+      if (user.length === 0) {
+        return res.status(404).json({
+          error: true,
+          message: "There is no discipline found.",
+        });
+      }
+
+      return res.status(200).json(user);
+    }
+
     const user = await User.find().select(
-      "-password -isAdmin -isAdminVerified -avatar -phone -birthDate"
+      "-isAdmin -isEmailVerified -isAdminVerified -password -birthDate -avatar"
     );
 
     if (!user) {

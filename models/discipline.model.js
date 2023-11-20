@@ -30,45 +30,14 @@ const disciplineSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
     groupId: {
-      type: mongoose.Schema.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Direction.group",
       required: true,
     },
-
     teacherId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
-    },
-    method: {
-      type: String,
-      enum: ["Online", "Offline"],
-      required: true,
-    },
-    building: {
-      type: String,
-      when: {
-        method: "Offline",
-      },
-    },
-    room: {
-      type: String,
-      when: {
-        method: "Offline",
-      },
-    },
-    dayOfWeek: {
-      type: Number,
-      required: true,
-    },
-    startTime: {
-      type: String,
-      required: true,
-    },
-    finishTime: {
-      type: String,
       required: true,
     },
   },

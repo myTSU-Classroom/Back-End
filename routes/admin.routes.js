@@ -25,6 +25,8 @@ const {
 const {
   createDiscipline,
   updateDiscipline,
+  updateSchedule,
+  deleteSchedule,
   deleteDiscipline,
 } = require("../controller/discipline.controller");
 
@@ -72,5 +74,12 @@ router.delete(
   upload.none(),
   deleteDiscipline
 );
+
+/* Schedule */
+// Update a schedule
+router.put("/schedule", validateAdminToken, upload.none(), updateSchedule);
+
+// Delete a schedule
+router.delete("/schedule", validateAdminToken, upload.none(), deleteSchedule);
 
 module.exports = router;
