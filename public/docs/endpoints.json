@@ -198,6 +198,27 @@
   },
   {
     "method": "GET",
+    "endpoint": "/user?role=teacher",
+    "description": "Get all teacher",
+    "authorization": null,
+    "request": null,
+    "response": [
+      {
+        "_id": "655b4e7df72be76b389fc589",
+        "name": "Jane Doe",
+        "email": "janedoe@mail.com",
+        "phone": "+123456789",
+        "avatar": "avatar.png",
+        "role": "Teacher",
+        "faculty": "HITS",
+        "direction": "Software Enginering",
+        "group": 912023,
+        "grade": 4
+      }
+    ]
+  },
+  {
+    "method": "GET",
     "endpoint": "/discipline",
     "description": "Get all disciplines and its schedules",
     "authorization": null,
@@ -208,11 +229,11 @@
           "_id": "655b495e67ec8cfd774cd8ae",
           "discipline": "Mobile Development",
           "description_plainContent": "Description",
-          "description_htmlContent": "<p>Description</p>",
+          "description_htmlContent": "&#60;p&#62;Description&#60;&#47;p&#62;",
           "year": "2023-2024",
           "grade": "4",
           "readingAndLiterature_plainContent": "Reading and Literature",
-          "readingAndLiterature_htmlContent": "<p>Reading and Literature</p>",
+          "readingAndLiterature_htmlContent": "&#60;p&#62;Reading and Literature&#60;&#47;p&#62;",
           "groupId": "653625e276afb36db90df3d1",
           "teacherId": "6536135e3ef384f6c7fb3893"
         },
@@ -241,21 +262,21 @@
     "response": [
       {
         "discipline": {
-          "_id": "655b4ef0098e4768c913299a",
-          "discipline": "Mobile Development",
+          "_id": "656d700b1ad86a9543cc7de8",
+          "discipline": "Website Development",
           "description_plainContent": "Description",
           "description_htmlContent": "<p>Description</p>",
           "year": "2023-2024",
           "grade": "4",
           "readingAndLiterature_plainContent": "Reading and Literature",
           "readingAndLiterature_htmlContent": "<p>Reading and Literature</p>",
-          "groupId": "653625e276afb36db90df3d1",
-          "teacherId": "655b4e7df72be76b389fc589"
+          "groupId": ["653625e276afb36db90df3d1", "654a2802be9cb9ed2d0e7f2e"],
+          "teacherId": "6536135e3ef384f6c7fb3893"
         },
         "schedule": [
           {
-            "_id": "655b4ef0098e4768c913299c",
-            "disciplineId": "655b4ef0098e4768c913299a",
+            "_id": "656d700b1ad86a9543cc7dea",
+            "disciplineId": "656d700b1ad86a9543cc7de8",
             "season": "Autumn",
             "method": "Offline",
             "building": "2",
@@ -285,7 +306,7 @@
           "grade": "4",
           "readingAndLiterature_plainContent": "Reading and Literature",
           "readingAndLiterature_htmlContent": "<p>Reading and Literature</p>",
-          "groupId": "653625e276afb36db90df3d1",
+          "groupId": ["653625e276afb36db90df3d1"],
           "teacherId": "655b4e7df72be76b389fc589"
         },
         "schedule": [
@@ -321,7 +342,7 @@
           "grade": "4",
           "readingAndLiterature_plainContent": "Reading and Literature",
           "readingAndLiterature_htmlContent": "<p>Reading and Literature</p>",
-          "groupId": "653625e276afb36db90df3d1",
+          "groupId": ["653625e276afb36db90df3d1"],
           "teacherId": "655b4e7df72be76b389fc589"
         },
         "schedule": [
@@ -353,8 +374,8 @@
       "grade": "4",
       "readingAndLiterature_plainContent": "Reading and Literature",
       "readingAndLiterature_htmlContent": "&#60;p&#62;Reading and Literature&#60;&#47;p&#62;",
-      "groupId": "653625e276afb36db90df3d1",
-      "teacherId": "6536135e3ef384f6c7fb3893",
+      "groupId": ["653625e276afb36db90df3d1", "654a2802be9cb9ed2d0e7f2e"],
+      "teacherId": "655b4e7df72be76b389fc589",
       "season": "Autumn",
       "method": "Offline",
       "building": 2,
@@ -374,15 +395,15 @@
     "description": "Update a discipline",
     "authorization": "Authorization: Bearer &lt;token&gt;",
     "request": {
-      "disciplineId": "655b3f27c9b0eff685a51471",
-      "disciplineName": "Russian History",
+      "disciplineId": "656d700b1ad86a9543cc7de8",
+      "disciplineName": "Website Development",
       "description_plainContent": "Description",
       "description_htmlContent": "&#60;p&#62;Description&#60;&#47;p&#62;",
       "year": "2023-2024",
       "grade": "4",
       "readingAndLiterature_plainContent": "Reading and Literature",
       "readingAndLiterature_htmlContent": "&#60;p&#62;Reading and Literature&#60;&#47;p&#62;",
-      "groupId": "653625e276afb36db90df3d1",
+      "groupId": ["653625e276afb36db90df3d1"],
       "teacherId": "6536135e3ef384f6c7fb3893"
     },
     "response": {
