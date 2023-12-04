@@ -66,6 +66,7 @@ async function registerUser(req, res) {
 
 async function getUser(req, res) {
   try {
+    // Get user based on ID
     if (req.query.userId !== undefined) {
       if (!mongoose.Types.ObjectId.isValid(req.query.userId)) {
         return res.status(400).json({
@@ -81,7 +82,27 @@ async function getUser(req, res) {
       if (user.length === 0) {
         return res.status(404).json({
           error: true,
-          message: "There is no discipline found.",
+          message: "There is no user found.",
+        });
+      }
+
+      return res.status(200).json(user);
+    }
+
+    // Get user based on teacher role
+    if (req.query.role !== undefined) {
+      const role = req.query.role.toLowerCase();
+
+      const user = await User.find({
+        role: { $regex: new RegExp(req.query.role, "i") },
+      }).select(
+        "-isAdmin -isEmailVerified -isAdminVerified -password -birthDate"
+      );
+
+      if (user.length === 0) {
+        return res.status(404).json({
+          error: true,
+          message: "There is no user found.",
         });
       }
 

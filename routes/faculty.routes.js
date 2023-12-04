@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   getFaculty,
   getDirectionAndGroup,
+  getGroup,
 } = require("../controller/faculty.controller");
 
 const { getAllDiscipline } = require("../controller/discipline.controller");
@@ -15,5 +16,8 @@ router.get("/faculty/:id", getDirectionAndGroup);
 
 // Get all disciplines
 router.get("/discipline", getAllDiscipline);
+
+// Get all groups
+router.get("/group", getGroup);
 
 module.exports = router;

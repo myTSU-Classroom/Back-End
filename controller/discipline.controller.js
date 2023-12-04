@@ -7,7 +7,9 @@ const mongoose = require("mongoose");
 async function createDiscipline(req, res, next) {
   try {
     const teacherId = new mongoose.Types.ObjectId(req.body.teacherId);
-    const groupId = new mongoose.Types.ObjectId(req.body.groupId);
+    const groupId = req.body.groupId.map(
+      (id) => new mongoose.Types.ObjectId(id)
+    );
 
     if (req.body.method === "Online") {
       req.body.building = null;
@@ -219,7 +221,9 @@ async function updateDiscipline(req, res, next) {
 
   try {
     const teacherId = new mongoose.Types.ObjectId(req.body.teacherId);
-    const groupId = new mongoose.Types.ObjectId(req.body.groupId);
+    const groupId = req.body.groupId.map(
+      (id) => new mongoose.Types.ObjectId(id)
+    );
 
     const updatedDiscipline = {
       discipline: req.body.disciplineName,

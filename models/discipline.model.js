@@ -30,11 +30,13 @@ const disciplineSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    groupId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Direction.group",
-      required: true,
-    },
+    groupId: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Direction.group",
+        required: true,
+      },
+    ],
     teacherId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

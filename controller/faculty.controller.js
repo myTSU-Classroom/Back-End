@@ -52,7 +52,30 @@ async function getDirectionAndGroup(req, res) {
   }
 }
 
+async function getGroup(req, res) {
+  try {
+    const direction = await Direction.find();
+
+    if (direction.length === 0) {
+      return res.status(404).json({
+        error: true,
+        message: "There is no direction found.",
+      });
+    }
+
+    const groups = [].concat(...direction.map((direction) => direction.group));
+
+    return res.status(200).json(groups);
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message,
+    });
+  }
+}
+
 module.exports = {
   getFaculty,
   getDirectionAndGroup,
+  getGroup,
 };
