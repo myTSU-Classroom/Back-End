@@ -3,8 +3,10 @@ const { Token } = require("../models/token.model");
 const emailHelper = require("../helper/email.helper");
 const crypto = require("crypto");
 const { User } = require("../models/user.model");
+const { Blacklist } = require("../models/blacklist.model");
 const constant = require("../middleware/constants");
 const mongoose = require("mongoose");
+const { generateAccessToken, parseToken } = require("../helper/jwt.helper");
 
 async function registerUser(req, res) {
   try {
@@ -60,6 +62,30 @@ async function registerUser(req, res) {
     return res.status(400).json({
       error: true,
       message: err.message,
+    });
+  }
+}
+
+async function loginUser(req, res) {
+  try {
+    const email = req.body.email;
+
+    const user = await User.findOne({ email: email });
+    if (!user || user.password !== req.body.password) {
+      return res.status(403).json({
+        error: true,
+        message: "Password is incorrect",
+      });
+    }
+
+    const token = generateAccessToken(user._id);
+
+    return res.status(200).json({ token: token });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: true,
+      message: error.message,
     });
   }
 }
@@ -130,7 +156,57 @@ async function getUser(req, res) {
   }
 }
 
+async function editProfile(req, res) {
+  try {
+    const isUserExist = await User.findById(req.body.userId);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: true,
+      message: error.message,
+    });
+  }
+}
+
+async function logoutProfile(req, res) {
+  try {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+      return res.status(401).json({
+        error: true,
+        message: "Access token is missing.",
+      });
+    }
+
+    const token = authHeader && authHeader.split(" ")[1];
+
+    const tokenParsed = parseToken(req, res);
+
+    const newBlacklistedToken = new Blacklist({
+      token: token,
+      userId: tokenParsed.sub,
+    });
+
+    newBlacklistedToken.save();
+
+    return res.status(200).json({
+      error: false,
+      message: "Successfully logged out",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: true,
+      message: error.message,
+    });
+  }
+}
+
 module.exports = {
   registerUser,
   getUser,
+  loginUser,
+  editProfile,
+  logoutProfile,
 };

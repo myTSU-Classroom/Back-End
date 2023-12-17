@@ -6,7 +6,10 @@ const mongoose = require("mongoose");
 // Create a new discipline
 async function createDiscipline(req, res, next) {
   try {
-    const teacherId = new mongoose.Types.ObjectId(req.body.teacherId);
+    const teacherId = req.body.teacherId.map(
+      (id) => new mongoose.Types.ObjectId(id)
+    );
+
     const groupId = req.body.groupId.map(
       (id) => new mongoose.Types.ObjectId(id)
     );
@@ -220,7 +223,10 @@ async function updateDiscipline(req, res, next) {
   }
 
   try {
-    const teacherId = new mongoose.Types.ObjectId(req.body.teacherId);
+    const teacherId = req.body.teacherId.map(
+      (id) => new mongoose.Types.ObjectId(id)
+    );
+
     const groupId = req.body.groupId.map(
       (id) => new mongoose.Types.ObjectId(id)
     );
