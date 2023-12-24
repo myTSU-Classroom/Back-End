@@ -69,7 +69,18 @@ async function validateAdminToken(req, res, next) {
   const token = authorizationHeader.split(" ")[1];
 
   try {
-    const decodedToken = jwt.verify(token, secret);
+    const isBlacklistedToken = await Blacklist.findOne({ token: token });
+    if (isBlacklistedToken) {
+      return res.status(403).json({
+        error: true,
+        message: "Token is blacklisted. Please login again.",
+      });
+    }
+
+    const decodedToken = jwt.decode(token, secret, {
+      complete: true,
+    });
+    console.log(decodedToken);
 
     if (!decodedToken) {
       return res.status(403).json({
@@ -78,21 +89,13 @@ async function validateAdminToken(req, res, next) {
       });
     }
 
-    const userId = decodedToken.userId;
+    const userId = decodedToken.sub;
     const user = await User.findById(userId);
 
     if (!user) {
       return res.status(404).json({
         error: true,
         message: "Admin user is not found in the access token.",
-      });
-    }
-
-    const isBlacklistedToken = await Blacklist.find({ userId: userId });
-    if (isBlacklistedToken) {
-      return res.status(403).json({
-        error: true,
-        message: "Token is blacklisted. Please login again.",
       });
     }
 
@@ -123,7 +126,7 @@ function generateAccessToken(userId) {
 
 // Parse access token
 function parseToken(req, res, next) {
-  const authHeader = req.headers["authorization"];
+  const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(" ")[1];
 
   if (token == null) return res.sendStatus(401);

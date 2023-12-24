@@ -21,6 +21,10 @@ const setupRouter = (app) => {
       nonce: constant.nonce,
     });
   });
+
+  app.use(`${apiUrl}/resetpassword`, (req, res, next) => {
+    return res.render("reset_password");
+  });
 };
 
 module.exports = setupRouter;

@@ -11,6 +11,10 @@ const tokenSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    usage: {
+      type: String,
+      required: true,
+    },
     expiredAt: {
       type: Number,
       required: true,

@@ -8,9 +8,11 @@ const {
   getUser,
   loginUser,
   logoutProfile,
+  acceptDefaultUser,
+  editProfile,
 } = require("../controller/user.controller");
 
-const { validateToken } = require("../helper/jwt.helper");
+const { validateAdminToken } = require("../helper/jwt.helper");
 
 // Register user
 router.post("/register", uploadAvatar.single("avatar"), registerUser);
@@ -18,10 +20,16 @@ router.post("/register", uploadAvatar.single("avatar"), registerUser);
 // Get user
 router.get("/user", getUser);
 
+// Edit user
+router.put("/profile", uploadAvatar.single("avatar"), editProfile);
+
 // Login user
 router.post("/login", loginUser);
 
 // Logout user
 router.post("/logout", logoutProfile);
+
+// Accept default user
+router.post("/acceptuser", validateAdminToken, acceptDefaultUser);
 
 module.exports = router;

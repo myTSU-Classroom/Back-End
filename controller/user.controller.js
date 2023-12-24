@@ -47,6 +47,7 @@ async function registerUser(req, res) {
     const token = new Token({
       userId: user._id,
       token: crypto.randomBytes(20).toString("hex"), // random hex string for token
+      usage: "Email Verification",
     });
 
     await token.save();
@@ -158,7 +159,39 @@ async function getUser(req, res) {
 
 async function editProfile(req, res) {
   try {
-    const isUserExist = await User.findById(req.body.userId);
+    const tokenParsed = parseToken(req, res);
+    const userId = tokenParsed.sub;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        error: true,
+        message: "User is not found",
+      });
+    }
+
+    const avatarPath = `${constant.hostUrl}/uploads/avatar/${req.file.filename}`;
+
+    const updatedUserFields = {
+      name: req.body.name || user.name,
+      birthDate: req.body.birthDate || user.birthDate,
+      phone: req.body.phone || user.phone,
+      avatar: avatarPath || user.avatar,
+      role: req.body.role || user.role,
+      password: req.body.password || user.password,
+      faculty: req.body.faculty || user.faculty,
+      direction: req.body.direction || user.direction,
+      group: req.body.group || user.group,
+      grade: req.body.grade || user.grade,
+    };
+
+    // Update the user in the database
+    await User.findByIdAndUpdate(userId, updatedUserFields);
+
+    return res.status(200).json({
+      error: false,
+      message: "User has been updated successfully",
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -203,10 +236,52 @@ async function logoutProfile(req, res) {
   }
 }
 
+async function acceptDefaultUser(req, res) {
+  try {
+    const defaultUserId = req.body.userId;
+
+    const user = await User.findById(defaultUserId);
+    if (!user) {
+      return res.status(404).json({
+        error: true,
+        message: "User not found",
+      });
+    }
+
+    user.isAdminVerified = true;
+    await user.save();
+
+    const token = new Token({
+      userId: user._id,
+      token: crypto.randomBytes(20).toString("hex"), // random hex string for token
+      usage: "Password Reset",
+      expiredAt: Date.now() + 7 * 24 * 60 * 60 * 1000, // A week
+    });
+
+    await token.save();
+
+    req.body.email = user.email;
+
+    emailHelper.sendResetPasswordEmail(req, token.token);
+
+    return res.status(200).json({
+      error: false,
+      message: `Successfully verified ${user.name}`,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: true,
+      message: error.message,
+    });
+  }
+}
+
 module.exports = {
   registerUser,
   getUser,
   loginUser,
   editProfile,
   logoutProfile,
+  acceptDefaultUser,
 };

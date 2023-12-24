@@ -71,6 +71,64 @@
     }
   },
   {
+    "method": "PUT",
+    "endpoint": "/profile",
+    "description": "Update an account",
+    "authorization": "Authorization: Bearer &lt;token&gt;",
+    "request": {
+      "name": "String",
+      "birthDate": "DATE in milliseconds (Number)",
+      "phone": "String",
+      "role": "Student&#34; &#47; &#34;Teacher",
+      "faculty": "String",
+      "direction": "String",
+      "group": "String",
+      "grade": "Number",
+      "avatar": "File"
+    },
+    "response": {
+      "error": false,
+      "message": "User has been updated successfully"
+    }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/login",
+    "description": "Login to the server",
+    "authorization": null,
+    "request": {
+      "email": "address@gmail.com",
+      "password": "INYlRP0BcmTzQ4uW"
+    },
+    "response": {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTM2MTM1ZTNlZjM4NGY2YzdmYjM4OTMiLCJpYXQiOjE3MDM0MDI3NzYsImV4cCI6MTcwMzQwNDU3Nn0.miX_WgDBk7ZFWufvC-YhVrUPD6pwXUpDFdVf_GSTC6Q"
+    }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/logout",
+    "description": "Logout to the server",
+    "authorization": "Authorization: Bearer &lt;token&gt;",
+    "request": null,
+    "response": {
+      "error": false,
+      "message": "Successfully logged out"
+    }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/acceptuser",
+    "description": "Accept default user by admin",
+    "authorization": "Authorization: Bearer &lt;token&gt;",
+    "request": {
+      "userId": "655b4e7df72be76b389fc589"
+    },
+    "response": {
+      "error": false,
+      "message": "Successfully verified Jane Doe"
+    }
+  },
+  {
     "method": "POST",
     "endpoint": "/admin/faculty",
     "description": "Create a new faculty",

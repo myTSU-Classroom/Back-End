@@ -10,6 +10,7 @@ const constant = {
   jwtSecret: process.env.JWT_SECRET,
   hostUrl: process.env.HOST_URL,
   nonce: crypto.randomBytes(16).toString("base64"),
+  serverEmail: '"MyTSU Classroom" <no-reply@mytsuclassroom.my.id>',
 };
 
 module.exports = constant;

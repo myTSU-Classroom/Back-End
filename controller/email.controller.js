@@ -43,6 +43,69 @@ async function verifyEmail(req, res) {
   }
 }
 
+function viewResetPasswordPage(req, res) {
+  return res.status(200).render("reset_password", {
+    path: `${constant.apiUrl}/public`,
+    token: req.query.token,
+    nonce: constant.nonce,
+  });
+}
+
+async function changePassword(req, res) {
+  try {
+    if (req.query.token === undefined) {
+      return res.status(403).json({
+        error: true,
+        message: "Token is required to change password",
+      });
+    }
+
+    const token = req.query.token;
+    const isTokenStored = await Token.findOne({ token: token });
+
+    if (isTokenStored.length === 0) {
+      return res.status(404).json({
+        error: true,
+        message: "Token is not found",
+      });
+    }
+
+    const user = await User.findOne({ _id: isTokenStored.userId });
+    if (user.length === 0) {
+      return res.status(404).json({
+        error: true,
+        message: "User is not found",
+      });
+    }
+    console.log(`User: ${user}`);
+
+    const password = req.body.password.toString();
+    const retypePassword = req.body.confirm_password.toString();
+
+    if (password !== retypePassword) {
+      return res.status(400).json({
+        error: true,
+        message: "Password and password confirmation does not match",
+      });
+    }
+
+    user.password = password;
+    await user.save();
+
+    return res.status(200).json({
+      error: false,
+      message: "Password has been changed successfully",
+    });
+  } catch (error) {
+    return res.status(500).send({
+      error: true,
+      message: err.message,
+    });
+  }
+}
+
 module.exports = {
   verifyEmail,
+  viewResetPasswordPage,
+  changePassword,
 };
